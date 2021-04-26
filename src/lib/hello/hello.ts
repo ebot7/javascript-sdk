@@ -18,9 +18,5 @@
  * @param lang - the language to use in greeting - en(default) or es
  */
 export const greet = (name: string, lang: string) => {
-  /**
-   * This es7 exponentiation operator is transpiled by TypeScript
-   */
-
-  return (lang?.toLowerCase() === 'es') ? `Hola! ${name}` : `Hello! ${name}`;
+  return lang?.toLowerCase() == 'es' ? `Hola! ${name}` : `Hello! ${name}`;
 };
