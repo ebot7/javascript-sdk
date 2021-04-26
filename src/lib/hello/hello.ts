@@ -1,0 +1,26 @@
+/**
+ * Returns a greeting in either English(Default) or Spanish
+ *
+ * ### Example (es module)
+ * ```js
+ * import { greet } from 'hello'
+ * console.log(greet('Ebot7', 'es'))
+ * // => Hola! ebot7.
+ * ```
+ *
+ * ### Example (commonjs)
+ * ```js
+ * var power = require('hello').greet;
+ * console.log(greet('ebot7', 'es'))
+ * // => Hola! ebot7.
+ * ```
+ * @param name - the name(default=Ebot) to use for the greeting
+ * @param lang - the language to use in greeting - en(default) or es
+ */
+export const greet = (name: string, lang: string) => {
+  /**
+   * This es7 exponentiation operator is transpiled by TypeScript
+   */
+
+  return (lang?.toLowerCase() === 'es') ? `Hola! ${name}` : `Hello! ${name}`;
+};
