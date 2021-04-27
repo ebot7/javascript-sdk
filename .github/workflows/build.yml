@@ -48,7 +48,7 @@ jobs:
       - name: Build
         run: |
           yarn install
-          yarn build     
+          yarn build    
 
   
   # Run unit tests on all platforms/versions of node
@@ -73,7 +73,8 @@ jobs:
       - name: Install dependencies and run tests with default env
         run: |
           yarn install
-          yarn test:unit --max-workers ${{ steps.cpu-cores.outputs.count }}
+          yarn build
+          yarn test:unit
         # yarn jest --max-workers ${{ steps.cpu-cores.outputs.count }}
 
 
