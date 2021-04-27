@@ -1,0 +1,110 @@
+name: Validate, Test and Build
+on: push
+jobs:
+  # Confirm that prettier was run on the changes
+  prettier:
+    name: Prettier check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+      - name: Install dependencies and run prettier-check
+        run: |
+          yarn install
+          yarn test:prettier
+
+  # Make sure eslint passes
+  eslint:
+    name: ESLint check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+      - name: Install dependencies and run eslint
+        run: |
+          yarn install
+          yarn test:lint
+
+  # Run unit tests on all platforms/versions of node
+  unit:
+    name: Unit tests
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [12.x, 14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2.1.5
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v1
+      - name: Install dependencies and run tests with default env
+        run: |
+          yarn install
+          yarn test:unit --max-workers ${{ steps.cpu-cores.outputs.count }}
+
+        # yarn jest --max-workers ${{ steps.cpu-cores.outputs.count }}
+        
+
+  # Run end-to-end tests along with the microservices in docker-compose on Linux
+  # e2e:
+  #   name: End-To-End Tests
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [12.x, 14.x]
+  #   steps:
+  #     - uses: actions/cache@v2.1.5
+  #       with:
+  #         path: /tmp/.buildx-cache
+  #         key: ${{ runner.os }}-buildx-${{ github.sha }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-buildx-
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v2.1.5
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - uses: microsoft/playwright-github-action@v1
+  #     - name: Start microservices and run tests
+  #       run: |
+  #         yarn install
+  #         yarn services:start
+  #         yarn jest:e2e
+
+  # Build the sources for publishing
+  build:
+    name: Build sources
+    needs: [prettier, eslint, unit]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    steps:
+      - uses: actions/cache@v2.1.5
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build
+        run: |
+          yarn install
+          yarn build
+  
