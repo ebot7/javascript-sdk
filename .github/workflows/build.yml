@@ -48,14 +48,11 @@ jobs:
             ${{ runner.os }}-
       - uses: actions/setup-node@v2.1.5
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Get number of CPU cores
-        uses: SimenB/github-actions-cpu-cores@v1
+          node-version: ${{ matrix.node-version }}      
       - name: Install dependencies and run tests with default env
         run: |
           yarn install
-          yarn test:unit --max-workers ${{ steps.cpu-cores.outputs.count }}
-
+          yarn test:unit
         # yarn jest --max-workers ${{ steps.cpu-cores.outputs.count }}
         
 
