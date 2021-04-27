@@ -1,0 +1,65 @@
+name: Validate, Build and Test
+on: push
+jobs:   
+  # Confirm that prettier was run on the changes
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+      - name: Install dependencies and run prettier-check
+        run: |
+          yarn install
+          yarn test:prettier
+
+  # Make sure eslint passes
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+      - name: Install dependencies and run eslint
+        run: |
+          yarn install
+          yarn test:lint
+
+  # Make sure unit tests passes
+  unit:
+    name: Unit Test
+    needs: [prettier, eslint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+      - name: Install dependencies and run unit tests
+        run: |
+          yarn install
+          yarn build
+          yarn test:unit
+
+  # Make sure build works for both 12.x and 14.x
+  build:
+    name: Build
+    needs: [unit]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    steps:
+      - uses: actions/cache@v2.1.5
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build
+        run: |
+          yarn install
+          yarn build
+          yarn test 
