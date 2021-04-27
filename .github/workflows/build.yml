@@ -55,24 +55,21 @@ jobs:
   unit:
     name: Unit tests
     needs: [prettier, eslint]
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
         node-version: [12.x, 14.x]
     steps:
       - uses: actions/cache@v2.1.5
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+          path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Get number of CPU cores
-        uses: SimenB/github-actions-cpu-cores@v1
       - name: Install dependencies and run tests with default env
         run: |
           yarn install
