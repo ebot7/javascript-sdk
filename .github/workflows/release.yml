@@ -6,8 +6,7 @@ on:
 jobs:
   # Make sure build and tests works for both 12.x and 14.x
   build:
-    name: Build, Test, Prep-release
-    needs: [unit]
+    name: Install, build, test and prep-release
     runs-on: ubuntu-latest
     strategy:
       matrix:
