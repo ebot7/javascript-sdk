@@ -1,58 +1,8 @@
 name: Validate, Test and Build
 on: push
-jobs:
-  # Confirm that prettier was run on the changes
-  prettier:
-    name: Prettier
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
-      - name: Install dependencies and run prettier-check
-        run: |
-          yarn install
-          yarn test:prettier
-  
-  # Make sure eslint passes
-  eslint:
-    name: ESLint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
-      - name: Install dependencies and run eslint
-        run: |
-          yarn install
-          yarn test:lint
-  
-
-  # Build the sources for publishing
-  build:
-    name: Build
-    needs: [prettier, eslint]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
-    steps:
-      - uses: actions/cache@v2.1.5
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Build
-        run: |
-          yarn install
-          yarn build    
-
-  
+jobs:  
   # Run unit tests on all platforms/versions of node
-  unit:
+  build:
     name: Unit tests
     runs-on: ${{matrix.os}}
     strategy:
@@ -81,31 +31,4 @@ jobs:
         run: |
           yarn install
           yarn build
-          yarn test:unit --max-workers ${{ steps.cpu-cores.outputs.count }}
-
-
-  # Run end-to-end tests along with the microservices in docker-compose on Linux
-  # e2e:
-  #   name: End-To-End Tests
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [12.x, 14.x]
-  #   steps:
-  #     - uses: actions/cache@v2.1.5
-  #       with:
-  #         path: /tmp/.buildx-cache
-  #         key: ${{ runner.os }}-buildx-${{ github.sha }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-buildx-
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v2.1.5
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #     - uses: microsoft/playwright-github-action@v1
-  #     - name: Start microservices and run tests
-  #       run: |
-  #         yarn install
-  #         yarn services:start
-  #         yarn jest:e2e
-   
+          yarn test --max-workers ${{ steps.cpu-cores.outputs.count }}
