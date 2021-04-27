@@ -27,16 +27,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Get number of CPU cores
         uses: SimenB/github-actions-cpu-cores@v1
-      - name: Installing modules
-        run: |
-          "echo #Installing Modules"
-          yarn install
-          "echo #Prettier"
-          yarn test:prettier
-          "echo #Eslint"
-          yarn test:lint
-          "echo #Building modules"
-          yarn build
-          "echo #Running unit tests"
-          yarn test:unit --max-workers ${{ steps.cpu-cores.outputs.count }}
-          
+      - name: Installing Modules
+        run: yarn install
+      - name: Running Prettier
+        run: yarn test:prettier
+      - name: Running ESLint
+        run: yarn test:lint
+      - name: Building Libraries and Packages
+        run: yarn build
+      - name: Running Unit Tests
+        run: yarn test:unit --max-workers ${{ steps.cpu-cores.outputs.count }}
