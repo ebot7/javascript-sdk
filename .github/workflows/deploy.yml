@@ -1,0 +1,70 @@
+name: Publish NPM and GitHub Packages
+on:
+  release:
+    types: [created]
+jobs:
+  # Make sure build and tests works for both 12.x and 14.x
+  build:
+    name: Install, build and test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    steps:
+      - uses: actions/cache@v2.1.5
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build
+        run: |
+          yarn install
+          yarn build
+          yarn test
+
+
+  # Publish to NPM
+  npm:
+    runs-on: ubuntu-latest
+    needs: [build]
+    permissions: 
+      contents: read
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@ebot7'
+      - run: yarn
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # # Publish to Github Packages
+  # github:
+  #   runs-on: ubuntu-latest
+  #   needs: [build]
+  #   permissions: 
+  #     contents: read
+  #     packages: write
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v2.1.5
+  #       with:
+  #         node-version: [12.x, 14.x]
+  #         registry-url: 'https://npm.pkg.github.com'
+  #         # Defaults to the user or organization that owns the workflow file
+  #         scope: '@ebot7'
+  #     - run: npm install
+  #     - run: npm publish
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
