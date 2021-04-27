@@ -5,8 +5,7 @@ on:
 jobs:
   # Make sure build and tests works for both 12.x and 14.x
   build:
-    name: Build
-    needs: [unit]
+    name: Install, build and test
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,7 +26,6 @@ jobs:
           yarn install
           yarn build
           yarn test
-          yarn prepare-release
 
 
   # Publish to NPM
