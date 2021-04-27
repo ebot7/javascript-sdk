@@ -19,5 +19,5 @@
  * @returns The greeting text based on language and name passed.
  */
 export const greet = (name: string, lang: string): string => {
-  return lang.toLowerCase() == 'es' ? `Hola! ${name}` : `Hello! ${name}`;
+  return lang?.toLowerCase() == 'es' ? `Hola! ${name}` : `Hello! ${name}`;
 };
