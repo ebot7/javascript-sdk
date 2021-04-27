@@ -12,7 +12,6 @@ jobs:
         run: |
           yarn install
           yarn test:prettier
-
   # Make sure eslint passes
   eslint:
     name: ESLint check
@@ -24,10 +23,10 @@ jobs:
         run: |
           yarn install
           yarn test:lint
-
   # Run unit tests on all platforms/versions of node
   unit:
     name: Unit tests
+    needs: [prettier, eslint]
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
@@ -48,13 +47,15 @@ jobs:
             ${{ runner.os }}-
       - uses: actions/setup-node@v2.1.5
         with:
-          node-version: ${{ matrix.node-version }}      
+          node-version: ${{ matrix.node-version }}
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v1
       - name: Install dependencies and run tests with default env
         run: |
           yarn install
-          yarn test:unit
+          yarn test:unit --max-workers ${{ steps.cpu-cores.outputs.count }}
         # yarn jest --max-workers ${{ steps.cpu-cores.outputs.count }}
-        
+
 
   # Run end-to-end tests along with the microservices in docker-compose on Linux
   # e2e:
@@ -104,4 +105,4 @@ jobs:
         run: |
           yarn install
           yarn build
-  
+   
