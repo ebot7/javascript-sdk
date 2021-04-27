@@ -1,4 +1,4 @@
-name: Validate, Test and Build
+name: Validate, Build and Test
 on: push
 jobs:   
   # Confirm that prettier was run on the changes
