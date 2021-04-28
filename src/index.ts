@@ -1,3 +1,3 @@
-export * from './lib/async/async';
-export * from './lib/number/number';
-export * from './lib/hello/hello';
+export * from './helpers';
+export * from './functions';
+export * from './client';
