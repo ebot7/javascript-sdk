@@ -1,6 +1,6 @@
 import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-import config from './config.json';
+import config from '../../config/config.json';
 
 export interface IClientOptions extends AxiosRequestConfig {
   readonly bearerToken: string;

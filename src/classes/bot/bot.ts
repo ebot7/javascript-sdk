@@ -18,7 +18,7 @@ export type BotType = {
 };
 
 export class Bot {
-  private constructor(private readonly client: Client) {}
+  constructor(private readonly client: Client) {}
 
   /**
    * Fetches list of botIds.
@@ -26,7 +26,7 @@ export class Bot {
    * @param {IListBotOptions} options - Instance of IListBotOptions
    * @returns {Promise<Array<string>>} List of bot Ids
    */
-  async list(options: IListBotOptions): Promise<Array<string>> {
+  async list(options: IListBotOptions = {}): Promise<Array<string>> {
     const url = 'v1/bots/';
     const result = await this.client.getInstance().get(url, {
       params: {
