@@ -14,6 +14,7 @@ export class Client {
     private readonly options: IClientOptions = {
       baseURL: config?.baseURL,
       bearerToken: config?.bearerToken,
+      timeout: config?.timeout,
     }
   ) {
     this.axios = this.create(this.options);

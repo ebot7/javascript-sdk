@@ -25,6 +25,7 @@ export class Bot {
    *
    * @param {IListBotOptions} options - Instance of IListBotOptions
    * @returns {Promise<Array<string>>} List of bot Ids
+   * @throws  {Not Found | Unauthorized | Forbidden | EAI_AGAIN} HTTP Error
    */
   async list(options: IListBotOptions = {}): Promise<Array<string>> {
     const url = 'v1/bots/';
@@ -43,7 +44,7 @@ export class Bot {
    *
    * @param {IGetBotOptions} options - Instance of IGetBotOptions
    * @returns {Promise<Bot>} Single bot object
-   * @throws {Forbidden} HTTP Error (403) if botId is not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | EAI_AGAIN} HTTP Error
    */
   async get(options: IGetBotOptions): Promise<BotType> {
     const url = `v1/bots/${options.botId}`;
