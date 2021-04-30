@@ -1,12 +1,21 @@
 import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+
+import config from './config.json';
+
 export interface IClientOptions extends AxiosRequestConfig {
   readonly bearerToken: string;
+  readonly baseURL: string;
 }
 
 export class Client {
   private axios: AxiosInstance;
 
-  private constructor(private readonly options: IClientOptions) {
+  constructor(
+    private readonly options: IClientOptions = {
+      baseURL: config?.baseURL,
+      bearerToken: config?.bearerToken,
+    }
+  ) {
     this.axios = this.create(this.options);
   }
 
@@ -27,6 +36,7 @@ export class Client {
         Accept: 'application/json',
         ...(options?.headers || {}),
       },
+      baseURL: `${options.baseURL}`,
     });
   }
 }

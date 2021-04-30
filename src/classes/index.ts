@@ -1,3 +1,4 @@
+export * from './client';
 export * from './conversation';
 export * from './external-conversation';
 export * from './message';
