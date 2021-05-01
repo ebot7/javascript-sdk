@@ -6,7 +6,7 @@ import { Bot } from './bot';
 
 const bot = new Bot(new Client());
 
-describe('test bot instance created successfully', () => {
+describe('test Bot instance created successfully', () => {
   it('should be an instance of a Bot class', () => {
     expect(bot instanceof Bot).toBe(true);
   });
@@ -18,7 +18,7 @@ describe('test bot list api works correctly', () => {
       const items = await bot.list();
       expect(Array.isArray(items)).toEqual(true); // Items should be an array of ids
     } catch (error) {
-      expectHttpErrorText(error?.response?.statusText);
+      expectHttpErrorText(error?.response?.statusText, error);
     }
   });
 });
@@ -26,15 +26,16 @@ describe('test bot list api works correctly', () => {
 describe('test bot get api works correctly', () => {
   it('should return a bot object or http error', async () => {
     try {
-      const items = await bot.list(); // Let's get botId first
-      expect(Array.isArray(items)).toEqual(true);
+      const items = await bot.list();
       const botId = items?.pop() || config?.botId;
-      const botObject = await bot.get({ botId: botId });
-      expect(botObject).toHaveProperty('id', botId);
+      if (botId) {
+        const botObject = await bot.get({ botId: botId });
+        expect(botObject).toHaveProperty('id', botId);
+      }
     } catch (error) {
       // Case when an error occurred
       // use error.response.status or error.response.statusText
-      expectHttpErrorText(error?.response?.statusText);
+      expectHttpErrorText(error?.response?.statusText, error);
     }
   });
 });

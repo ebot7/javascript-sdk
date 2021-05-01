@@ -41,14 +41,14 @@ export type ConversationType = {
 };
 
 export class Conversation {
-  private constructor(private readonly client: Client) {}
+  constructor(private readonly client: Client) {}
 
   /**
    * Fetches list of conversations based on botId.
    *
    * @param {IListConversationOptions} options - Instance of IListConversationOptions
    * @returns {Promise<Array<ConversationType>>} List of conversation object type
-   * @throws {Forbidden} HTTP Error (403) if botId is not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async list(
     options: IListConversationOptions
@@ -71,7 +71,7 @@ export class Conversation {
    *
    * @param {IGetConversationOptions} options - Instance of IGetConversationOptions
    * @returns {Promise<ConversationType>} Single conversation object
-   * @throws {Forbidden} HTTP Error (403) if botId and/or convId are not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async get(options: IGetConversationOptions): Promise<ConversationType> {
     const url = `/v1/bots/${options.botId}/convs/${options.convId}`;
@@ -85,11 +85,11 @@ export class Conversation {
    *
    * @param {ICreateConversationOptions} options - Instance of ICreateConversationOptions
    * @returns {Promise<ConversationType>} Single conversation object
-   * @throws {Forbidden} HTTP Error (403) if botId is not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async create(options: ICreateConversationOptions): Promise<ConversationType> {
     const url = `/v1/bots/${options.botId}/convs`;
-    const result = await this.client.getInstance().post(url, {
+    const result = await this.client.getInstance().patch(url, {
       body: options.body,
     });
 
@@ -101,11 +101,11 @@ export class Conversation {
    *
    * @param {IUpdateConversationOptions} options - Instance of IUpdateConversationOptions
    * @returns {Promise<ConversationType>} Single conversation object
-   * @throws {Forbidden} HTTP Error (403) if botId and/or convId are not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
-  async update(options: IUpdateConversationOptions): Promise<ConversationType> {
+  async patch(options: IUpdateConversationOptions): Promise<ConversationType> {
     const url = `/v1/bots/${options.botId}/convs/${options.convId}`;
-    const result = await this.client.getInstance().post(url, {
+    const result = await this.client.getInstance().patch(url, {
       body: options.body,
     });
 

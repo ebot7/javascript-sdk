@@ -12,14 +12,14 @@ export interface IUpdateExternalConversationOptions
 }
 
 export class ExternalConversation {
-  private constructor(private readonly client: Client) {}
+  constructor(private readonly client: Client) {}
 
   /**
    *  Gets an active conversation for bot with botId by its externalId
    *
    * @param {IGetExternalConversationOptions} options - Instance of IGetExternalConversationOptions
    * @returns {Promise<ConversationType>} Single conversation object
-   * @throws {Forbidden} HTTP Error (403) if botId and/or externalId are not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async get(
     options: IGetExternalConversationOptions
@@ -35,13 +35,13 @@ export class ExternalConversation {
    *
    * @param {IUpdateExternalConversationOptions} options - Instance of IUpdateExternalConversationOptions
    * @returns {Promise<ConversationType>} Single conversation object
-   * @throws {Forbidden} HTTP Error (403) if botId and/or externalId are not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
-  async update(
+  async patch(
     options: IUpdateExternalConversationOptions
   ): Promise<ConversationType> {
     const url = `/v1/bots/${options.botId}/external-convs/${options.externalId}`;
-    const result = await this.client.getInstance().post(url, {
+    const result = await this.client.getInstance().patch(url, {
       body: options.body,
     });
 

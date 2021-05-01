@@ -45,7 +45,7 @@ export type MessageType = {
 };
 
 export class Message {
-  private constructor(private readonly client: Client) {}
+  constructor(private readonly client: Client) {}
 
   /**
    * Fetches list of messages based on botId.
@@ -128,7 +128,7 @@ export class Message {
    */
   async create(options: ICreateMessageOptions): Promise<MessageType> {
     const url = `/v1/bots/${options.botId}/convs/${options.convId}/messages/`;
-    const result = await this.client.getInstance().post(url, {
+    const result = await this.client.getInstance().patch(url, {
       body: options.body,
     });
 
