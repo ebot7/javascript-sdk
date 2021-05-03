@@ -13,7 +13,8 @@ module.exports = {
   },
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
   "testPathIgnorePatterns" : [
-    "/node_modules/build/module/"
+    "/node_modules/",
+    "<rootDir>/build/module/",
   ]
 };
 
