@@ -1,4 +1,4 @@
-import { Client } from './client';
+import { Client, config } from './client';
 
 // Default parameters to be assigned if present in config.json
 const client = new Client();
