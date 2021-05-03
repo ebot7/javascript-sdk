@@ -6,7 +6,7 @@ const client = new Client();
 const conversation = new Conversation(client);
 
 describe('test Conversation client class', () => {
-  describe('test Bot instance instantiated successfully', () => {
+  describe('test Conversation instance created successfully', () => {
     it('should be an instance of a Conversation class', () => {
       expect(conversation instanceof Conversation).toBe(true);
     });

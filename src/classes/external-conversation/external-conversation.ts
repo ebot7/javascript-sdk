@@ -24,7 +24,7 @@ export class ExternalConversation {
   async get(
     options: IGetExternalConversationOptions
   ): Promise<ConversationType> {
-    const url = `/v1/bots/${options.botId}/external-convs/${options.externalId}`;
+    const url = `v1/bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.item;
@@ -40,7 +40,7 @@ export class ExternalConversation {
   async patch(
     options: IUpdateExternalConversationOptions
   ): Promise<ConversationType> {
-    const url = `/v1/bots/${options.botId}/external-convs/${options.externalId}`;
+    const url = `v1/bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.getInstance().patch(url, {
       body: options.body,
     });
