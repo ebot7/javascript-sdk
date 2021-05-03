@@ -13,7 +13,7 @@ describe('test Client class, methods and proper axios configuration', () => {
     expect(client.getInstance()).toBeInstanceOf(Object);
   });
   it('should have an axios instance that returns correct baseURL', () => {
-    expect(client.getInstance().defaults.baseURL).toEqual(config?.baseURL);
+    expect(client.getInstance()?.defaults?.baseURL).toEqual(config?.baseURL);
   });
   it('should have an axios instance that returns correct header bearer authorization', () => {
     expect(client.getInstance()?.defaults?.headers?.['Authorization']).toEqual(

@@ -24,7 +24,8 @@ export class Client {
     if (this.axios) {
       return this.axios;
     } else {
-      return (this.axios = this.create(this.options));
+      this.axios = this.create(this.options);
+      return this.axios;
     }
   }
 
