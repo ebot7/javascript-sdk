@@ -1,5 +1,3 @@
-import config from '../../config/config.json';
-
 import { Client } from './client';
 
 // Default parameters to be assigned if present in config.json
