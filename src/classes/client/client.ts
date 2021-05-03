@@ -42,3 +42,5 @@ export class Client {
     });
   }
 }
+
+export { config };
