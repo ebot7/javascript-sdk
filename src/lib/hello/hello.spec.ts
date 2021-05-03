@@ -1,8 +1,10 @@
-import test from 'ava';
-
 import { greet } from './hello';
 
-test('greet', (t) => {
-  t.is(greet('ebot7 JS SDK', 'en'), 'Hello! ebot7 JS SDK');
-  t.is(greet('ebot7 JS SDK', 'es'), 'Hola! ebot7 JS SDK');
+describe('test hello greeting', () => {
+  it('should return Hello! ebot7 JS SDK', async () => {
+    expect(greet('ebot7 JS SDK', 'en')).toEqual('Hello! ebot7 JS SDK');
+  });
+  it('should return Hola! ebot7 JS SDKK', async () => {
+    expect(greet('ebot7 JS SDK', 'es')).toEqual('Hola! ebot7 JS SDK');
+  });
 });
