@@ -51,11 +51,11 @@ export class Message {
    * Fetches list of messages based on botId.
    *
    * @param {IListMessageOptions} options - Instance of IListConversationOptions
-   * @returns {Promise<Array<MessageType >>} List of message object type
-   * @throws {Forbidden} HTTP Error (403) if botId is not correct
+   * @returns {Promise<Array<MessageType>>} List of message object type
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async list(options: IListMessageOptions): Promise<Array<MessageType>> {
-    const url = `/v1/bots/${options.botId}/messages/`;
+    const url = `v1/bots/${options.botId}/messages/`;
     const result = await this.client.getInstance().get(url, {
       params: {
         isGreeting: options?.isGreeting,
@@ -78,10 +78,10 @@ export class Message {
    *
    * @param {IGetMessageOptions} options - Instance of IGetMessageOptions
    * @returns {Promise<MessageType>} Single message object
-   * @throws {Forbidden} HTTP Error (403) if botId and/or messageId are not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async get(options: IGetMessageOptions): Promise<MessageType> {
-    const url = `/v1/bots/${options.botId}/messages/${options.messageId}`;
+    const url = `v1/bots/${options.botId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.item;
@@ -92,12 +92,12 @@ export class Message {
    *
    * @param {IListMessageByConversationOptions} options - Instance of IListMessageByConversationOptions
    * @returns {Promise<Array<MessageType>>} List of message object type for conversation with convId
-   * @throws {Forbidden} HTTP Error (403) if botId and/or convId are not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async listByConversation(
     options: IListMessageByConversationOptions
   ): Promise<Array<MessageType>> {
-    const url = `/v1/bots/${options.botId}/convs/${options.convId}/messages`;
+    const url = `v1/bots/${options.botId}/convs/${options.convId}/messages`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.items;
@@ -108,12 +108,12 @@ export class Message {
    *
    * @param {IGetMessageByConversationOptions} options - Instance of IGetMessageByConversationOptions
    * @returns {Promise<MessageType>} Single message object type for conversation with convId
-   * @throws {Forbidden} HTTP Error (403) if botId and/or convId and/or messageId are not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async getByConversation(
     options: IGetMessageByConversationOptions
   ): Promise<Array<MessageType>> {
-    const url = `/v1/bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
+    const url = `v1/bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.item;
@@ -124,11 +124,11 @@ export class Message {
    *
    * @param {ICreateMessageOptions} options - Instance of ICreateMessageOptions
    * @returns {Promise<MessageType>} Single message object type for conversation with convId
-   * @throws {Forbidden} HTTP Error (403) if botId and/or convId are not correct
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async create(options: ICreateMessageOptions): Promise<MessageType> {
-    const url = `/v1/bots/${options.botId}/convs/${options.convId}/messages/`;
-    const result = await this.client.getInstance().patch(url, {
+    const url = `v1/bots/${options.botId}/convs/${options.convId}/messages/`;
+    const result = await this.client.getInstance().post(url, {
       body: options.body,
     });
 
