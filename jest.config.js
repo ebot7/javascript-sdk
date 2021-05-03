@@ -14,7 +14,7 @@ module.exports = {
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
   "testPathIgnorePatterns" : [
     "/node_modules/",
-    "<rootDir>/build/module/",
+    "<rootDir>/build/",
   ]
 };
 
