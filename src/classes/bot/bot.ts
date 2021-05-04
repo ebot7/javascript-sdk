@@ -63,6 +63,8 @@ export class Bot {
    *         description: Forbidden.
    *       '404':
    *         description: Not Found.
+   *       '405':
+   *         description: Invalid Input.
    *       '408':
    *         description: Request Timeout.
    *       '500':
