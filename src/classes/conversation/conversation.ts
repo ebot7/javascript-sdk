@@ -53,7 +53,7 @@ export class Conversation {
   async list(
     options: IListConversationOptions
   ): Promise<Array<ConversationType>> {
-    const url = `v1/bots/${options.botId}/convs`;
+    const url = `bots/${options.botId}/convs`;
     const result = await this.client.getInstance().get(url, {
       params: {
         createdAt: options?.createdAt,
@@ -74,7 +74,7 @@ export class Conversation {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async get(options: IGetConversationOptions): Promise<ConversationType> {
-    const url = `v1/bots/${options.botId}/convs/${options.convId}`;
+    const url = `bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.item;
@@ -88,7 +88,7 @@ export class Conversation {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async create(options: ICreateConversationOptions): Promise<ConversationType> {
-    const url = `v1/bots/${options.botId}/convs`;
+    const url = `bots/${options.botId}/convs`;
     const result = await this.client.getInstance().post(url, {
       body: options.body,
     });
@@ -104,7 +104,7 @@ export class Conversation {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async patch(options: IUpdateConversationOptions): Promise<ConversationType> {
-    const url = `v1/bots/${options.botId}/convs/${options.convId}`;
+    const url = `bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.getInstance().patch(url, {
       body: options.body,
     });

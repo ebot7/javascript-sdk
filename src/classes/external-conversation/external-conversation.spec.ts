@@ -21,9 +21,7 @@ describe('test External Conversation client class', () => {
     it('should be called with correct path and parameters', async () => {
       const params = { botId, externalId };
       await conversation.get(params);
-      expect(mock).toBeCalledWith(
-        `v1/bots/${botId}/external-convs/${externalId}`
-      );
+      expect(mock).toBeCalledWith(`bots/${botId}/external-convs/${externalId}`);
     });
   });
 
@@ -43,7 +41,7 @@ describe('test External Conversation client class', () => {
         externalId,
       });
       expect(mock).toBeCalledWith(
-        `v1/bots/${botId}/external-convs/${externalId}`,
+        `bots/${botId}/external-convs/${externalId}`,
         params
       );
     });

@@ -55,7 +55,7 @@ export class Message {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async list(options: IListMessageOptions): Promise<Array<MessageType>> {
-    const url = `v1/bots/${options.botId}/messages/`;
+    const url = `bots/${options.botId}/messages/`;
     const result = await this.client.getInstance().get(url, {
       params: {
         isGreeting: options?.isGreeting,
@@ -81,7 +81,7 @@ export class Message {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async get(options: IGetMessageOptions): Promise<MessageType> {
-    const url = `v1/bots/${options.botId}/messages/${options.messageId}`;
+    const url = `bots/${options.botId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.item;
@@ -97,7 +97,7 @@ export class Message {
   async listByConversation(
     options: IListMessageByConversationOptions
   ): Promise<Array<MessageType>> {
-    const url = `v1/bots/${options.botId}/convs/${options.convId}/messages`;
+    const url = `bots/${options.botId}/convs/${options.convId}/messages`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.items;
@@ -113,7 +113,7 @@ export class Message {
   async getByConversation(
     options: IGetMessageByConversationOptions
   ): Promise<Array<MessageType>> {
-    const url = `v1/bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
+    const url = `bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.item;
@@ -127,7 +127,7 @@ export class Message {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async create(options: ICreateMessageOptions): Promise<MessageType> {
-    const url = `v1/bots/${options.botId}/convs/${options.convId}/messages/`;
+    const url = `bots/${options.botId}/convs/${options.convId}/messages/`;
     const result = await this.client.getInstance().post(url, {
       body: options.body,
     });
