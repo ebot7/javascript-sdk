@@ -19,10 +19,7 @@ describe('test External Conversation client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        botId: botId,
-        externalId: externalId,
-      };
+      const params = { botId, externalId };
       await conversation.get(params);
       expect(mock).toBeCalledWith(
         `v1/bots/${botId}/external-convs/${externalId}`
@@ -42,7 +39,8 @@ describe('test External Conversation client class', () => {
       };
       await conversation.patch({
         ...params,
-        ...{ botId: botId, externalId: externalId },
+        botId,
+        externalId,
       });
       expect(mock).toBeCalledWith(
         `v1/bots/${botId}/external-convs/${externalId}`,
