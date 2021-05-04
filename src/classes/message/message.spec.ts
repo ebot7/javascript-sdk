@@ -36,7 +36,7 @@ describe('test Message client class', () => {
         limit: 10,
       };
 
-      await message.list({ ...params, ...{ botId: botId } });
+      await message.list({ ...params, botId });
       expect(mock).toBeCalledWith(`v1/bots/${botId}/messages/`, {
         params: params,
       });
@@ -50,10 +50,7 @@ describe('test Message client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        botId: botId,
-        messageId: messageId,
-      };
+      const params = { botId, messageId };
       await message.get(params);
       expect(mock).toBeCalledWith(`v1/bots/${botId}/messages/${messageId}`);
     });
@@ -66,10 +63,7 @@ describe('test Message client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: [] }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        botId: botId,
-        convId: convId,
-      };
+      const params = { botId, convId };
       await message.listByConversation(params);
       expect(mock).toBeCalledWith(`v1/bots/${botId}/convs/${convId}/messages`);
     });
@@ -83,11 +77,7 @@ describe('test Message client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        botId: botId,
-        messageId: messageId,
-        convId: convId,
-      };
+      const params = { botId, messageId, convId };
       await message.getByConversation(params);
       expect(mock).toBeCalledWith(
         `v1/bots/${botId}/convs/${convId}/messages/${messageId}`
@@ -105,7 +95,7 @@ describe('test Message client class', () => {
       const params = {
         body: 'some well formatted body json',
       };
-      await message.create({ ...params, ...{ botId: botId, convId: convId } });
+      await message.create({ ...params, botId, convId });
       expect(mock).toBeCalledWith(
         `v1/bots/${botId}/convs/${convId}/messages/`,
         params

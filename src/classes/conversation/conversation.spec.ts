@@ -29,8 +29,8 @@ describe('test Conversation client class', () => {
         offset: 0,
         limit: 10,
       };
-      await conversation.list({ ...params, ...{ botId: botId } });
-      expect(mock).toBeCalledWith(`v1/bots/${botId}/convs`, { params: params });
+      await conversation.list({ ...params, botId });
+      expect(mock).toBeCalledWith(`v1/bots/${botId}/convs`, { params });
     });
   });
 
@@ -41,10 +41,7 @@ describe('test Conversation client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        botId: botId,
-        convId: convId,
-      };
+      const params = { botId, convId };
       await conversation.get(params);
       expect(mock).toBeCalledWith(`v1/bots/${botId}/convs/${convId}`);
     });
@@ -59,7 +56,7 @@ describe('test Conversation client class', () => {
       const params = {
         body: 'some well formatted body json',
       };
-      await conversation.create({ ...params, ...{ botId: botId } });
+      await conversation.create({ ...params, botId });
       expect(mock).toBeCalledWith(`v1/bots/${botId}/convs`, params);
     });
   });
@@ -76,7 +73,8 @@ describe('test Conversation client class', () => {
       };
       await conversation.patch({
         ...params,
-        ...{ botId: botId, convId: convId },
+        botId,
+        convId,
       });
       expect(mock).toBeCalledWith(`v1/bots/${botId}/convs/${convId}`, params);
     });
