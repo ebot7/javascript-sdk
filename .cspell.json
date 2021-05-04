@@ -21,6 +21,7 @@
         "jsdk",
         "libauth",
         "mkdir",
+        "openapi",
         "prettierignore",
         "sandboxed",
         "transpiled",
