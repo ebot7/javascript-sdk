@@ -1,13 +1,16 @@
 {
-  "name": "@bot7/javascript-sdk",
+  "name": "@ebot7/javascript-sdk",
   "version": "0.0.1",
   "description": "ebot7 Javascript SDK. A thin client for developing and testing aspects of the ebot7 Application.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/valerycolong/@bot7/javascript-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ebot7/javascript-sdk"
+  },
   "license": "MIT",
-  "keywords": [],
+  "keywords": ["Javascript", "SDK", "ebot7", "Typescript", "npm"],
   "scripts": {
     "build": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",
@@ -93,5 +96,6 @@
     "exclude": [
       "**/*.spec.js"
     ]
-  }
+  },
+  "author": "Fua Tse"
 }
