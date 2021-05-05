@@ -53,6 +53,45 @@ export class Message {
    * @param {IListMessageOptions} options - Instance of IListConversationOptions
    * @returns {Promise<Array<MessageType>>} List of message object type
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
+   *
+   * @openapi
+   * /bots/{botId}/messages
+   *   get:
+   *     operationId: findManyMessages
+   *     summary: List messages
+   *     description: List all messages of a bot.
+   *     produces:
+   *     - "application/json"
+   *     consumes:
+   *     - "application/json"
+   *     parameters:
+   *       - name: botId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the bot.
+   *         schema:
+   *           type: string
+   *     responses:
+   *       '200':
+   *         description: A list of available messages filtered by given bot ID
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/BotEngineMessageListApiOutput'
+   *       '401':
+   *         description: Unauthorized.
+   *       '403':
+   *         description: Forbidden.
+   *       '404':
+   *         description: Not Found.
+   *       '405':
+   *         description: Invalid Input.
+   *       '408':
+   *         description: Request Timeout.
+   *       '500':
+   *         description: Internal Server Error.
+   *     tags:
+   *       - Messages
    */
   async list(options: IListMessageOptions): Promise<Array<MessageType>> {
     const url = `bots/${options.botId}/messages/`;
@@ -79,6 +118,51 @@ export class Message {
    * @param {IGetMessageOptions} options - Instance of IGetMessageOptions
    * @returns {Promise<MessageType>} Single message object
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
+   *
+   * @openapi
+   * /bots/{botId}/messages/{messageId}
+   *   get:
+   *     operationId: findSingleMessage
+   *     summary: Get message
+   *     description: Get a single message.
+   *     produces:
+   *     - "application/json"
+   *     consumes:
+   *     - "application/json"
+   *     parameters:
+   *       - name: messageId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of a message.
+   *         schema:
+   *           type: string
+   *       - name: botId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the bot.
+   *         schema:
+   *           type: string
+   *     responses:
+   *       '200':
+   *         description: Find message details by given bot and message IDs
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/BotEngineMessageDetailApiOutput'
+   *       '401':
+   *         description: Unauthorized.
+   *       '403':
+   *         description: Forbidden.
+   *       '404':
+   *         description: Not Found.
+   *       '405':
+   *         description: Invalid Input.
+   *       '408':
+   *         description: Request Timeout.
+   *       '500':
+   *         description: Internal Server Error.
+   *     tags:
+   *       - Messages
    */
   async get(options: IGetMessageOptions): Promise<MessageType> {
     const url = `bots/${options.botId}/messages/${options.messageId}`;
@@ -93,6 +177,52 @@ export class Message {
    * @param {IListMessageByConversationOptions} options - Instance of IListMessageByConversationOptions
    * @returns {Promise<Array<MessageType>>} List of message object type for conversation with convId
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
+   *
+   * @openapi
+   * /bots/{botId}/convs/{convId}/messages'
+   *   get:
+   *     operationId: findMessagesByConversation
+   *     summary: List messages by conversation
+   *     description: List messages for a conversation.
+   *     produces:
+   *     - "application/json"
+   *     consumes:
+   *     - "application/json"
+   *     parameters:
+   *       - name: botId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the bot.
+   *         schema:
+   *           type: string
+   *       - name: convId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the conversation.
+   *         schema:
+   *           type: string
+   *     responses:
+   *       '200':
+   *         description: A list of available messages filtered by given bot and conversation IDs
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/BotEngineMessageListApiOutput'
+   *               $ref: '#/components/schemas/BotEngineBotDetailApiOutput'
+   *       '401':
+   *         description: Unauthorized.
+   *       '403':
+   *         description: Forbidden.
+   *       '404':
+   *         description: Not Found.
+   *       '405':
+   *         description: Invalid Input.
+   *       '408':
+   *         description: Request Timeout.
+   *       '500':
+   *         description: Internal Server Error.
+   *     tags:
+   *       - Messages
    */
   async listByConversation(
     options: IListMessageByConversationOptions
@@ -109,6 +239,58 @@ export class Message {
    * @param {IGetMessageByConversationOptions} options - Instance of IGetMessageByConversationOptions
    * @returns {Promise<MessageType>} Single message object type for conversation with convId
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
+   *
+   * @openapi
+   * /bots/{botId}/convs/{convId}/messages/{messageId}
+   *   get:
+   *     operationId: findSingleMessageInConversation
+   *     summary: Get message by conversation
+   *     description: Get a single message in a conversation.
+   *     produces:
+   *     - "application/json"
+   *     consumes:
+   *     - "application/json"
+   *     parameters:
+   *       - name: messageId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of a message.
+   *         schema:
+   *           type: string
+   *       - name: botId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the bot.
+   *         schema:
+   *           type: string
+   *       - name: convId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the conversation.
+   *         schema:
+   *           type: string
+   *     responses:
+   *       '200':
+   *         description: 'Find message details by given bot, conversation and message IDs'
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/BotEngineMessageDetailApiOutput'
+   *               $ref: '#/components/schemas/BotEngineBotDetailApiOutput'
+   *       '401':
+   *         description: Unauthorized.
+   *       '403':
+   *         description: Forbidden.
+   *       '404':
+   *         description: Not Found.
+   *       '405':
+   *         description: Invalid Input.
+   *       '408':
+   *         description: Request Timeout.
+   *       '500':
+   *         description: Internal Server Error.
+   *     tags:
+   *       - Messages
    */
   async getByConversation(
     options: IGetMessageByConversationOptions
@@ -125,6 +307,57 @@ export class Message {
    * @param {ICreateMessageOptions} options - Instance of ICreateMessageOptions
    * @returns {Promise<MessageType>} Single message object type for conversation with convId
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
+   *
+   * @openapi
+   * /bots/{botId}/convs/{convId}/messages
+   *   post:
+   *     operationId: CreateMessage
+   *     summary: Create message
+   *     description: Create a new message for a conversation.
+   *     produces:
+   *     - "application/json"
+   *     consumes:
+   *     - "application/json"
+   *     parameters:
+   *       - name: convId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the conversation.
+   *         schema:
+   *           type: string
+   *       - name: botId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the bot.
+   *         schema:
+   *           type: string
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/CreateBotEngineMessageDto'
+   *     responses:
+   *       '201':
+   *         description: Message has been successfully created.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/BotEngineMessageDetailApiOutput'
+   *       '401':
+   *         description: Unauthorized.
+   *       '403':
+   *         description: Forbidden.
+   *       '404':
+   *         description: Not Found.
+   *       '405':
+   *         description: Invalid Input.
+   *       '408':
+   *         description: Request Timeout.
+   *       '500':
+   *         description: Internal Server Error.
+   *     tags:
+   *       - Messages
    */
   async create(options: ICreateMessageOptions): Promise<MessageType> {
     const url = `bots/${options.botId}/convs/${options.convId}/messages/`;

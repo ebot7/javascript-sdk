@@ -43,13 +43,15 @@ export class Bot {
    *         name: limit
    *         in: query
    *         schema:
-   *           type: number
+   *           type: integer
+   *           format: int32
    *       - description: The offset of the first records to return.
    *         required: false
    *         name: offset
    *         in: query
    *         schema:
-   *           type: number
+   *           type: integer
+   *           format: int32
    *     responses:
    *       '200':
    *         description: A list of available bots
@@ -92,7 +94,43 @@ export class Bot {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
-   *
+   * /bots/{botId}:
+   *   get:
+   *     operationId: findSingleBot
+   *     summary: Get bot
+   *     description: Get a single bot details.
+   *     produces:
+   *     - "application/json"
+   *     consumes:
+   *     - "application/json"
+   *     parameters:
+   *       - name: botId
+   *         required: true
+   *         in: path
+   *         description: The unique ID of the bot.
+   *         schema:
+   *           type: string
+   *     responses:
+   *       '200':
+   *         description: A bot details object
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/BotEngineBotDetailApiOutput'
+   *       '401':
+   *         description: Unauthorized.
+   *       '403':
+   *         description: Forbidden.
+   *       '404':
+   *         description: Not Found.
+   *       '405':
+   *         description: Invalid Input.
+   *       '408':
+   *         description: Request Timeout.
+   *       '500':
+   *         description: Internal Server Error.
+   *     tags:
+   *       - Bots
    *
    */
   async get(options: IGetBotOptions): Promise<BotType> {
