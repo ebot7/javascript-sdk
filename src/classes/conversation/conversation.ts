@@ -4,6 +4,7 @@ export interface IListConversationOptions {
   botId: string;
   createdAt?: string;
   updatedAt?: string;
+  filter?: string;
   offset?: number;
   limit?: number;
 }
@@ -123,6 +124,7 @@ export class Conversation {
       params: {
         createdAt: options?.createdAt,
         updatedAt: options?.updatedAt,
+        filter: options?.filter,
         offset: options?.offset,
         limit: options?.limit,
       },
