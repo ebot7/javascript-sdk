@@ -1,6 +1,4 @@
 import { Client } from '../client';
-import { ConversationType } from '../conversation/conversation';
-
 export interface IGetExternalConversationOptions {
   botId: string;
   externalId: string; //The unique ID of the conversation in the external platform
