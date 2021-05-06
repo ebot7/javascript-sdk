@@ -15,7 +15,7 @@ export interface IGetConversationOptions {
 
 export interface ICreateConversationOptions {
   botId: string;
-  body: string | unknown;
+  payload: unknown;
 }
 
 export interface IUpdateConversationOptions extends ICreateConversationOptions {
@@ -246,9 +246,7 @@ export class Conversation {
    */
   async create(options: ICreateConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/convs`;
-    const result = await this.client.getInstance().post(url, {
-      body: options.body,
-    });
+    const result = await this.client.getInstance().post(url, options.payload);
 
     return result.data;
   }
@@ -313,9 +311,7 @@ export class Conversation {
    */
   async patch(options: IUpdateConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/convs/${options.convId}`;
-    const result = await this.client.getInstance().patch(url, {
-      body: options.body,
-    });
+    const result = await this.client.getInstance().patch(url, options.payload);
 
     return result.data;
   }

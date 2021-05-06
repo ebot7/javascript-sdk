@@ -24,9 +24,10 @@ export interface IGetMessageByConversationOptions extends IGetMessageOptions {
   convId: string;
 }
 
-export interface ICreateMessageOptions
-  extends IListMessageByConversationOptions {
-  body: string | unknown;
+export interface ICreateMessageOptions {
+  botId: string;
+  convId: string;
+  payload: unknown;
 }
 
 export type MessageType = {
@@ -375,9 +376,7 @@ export class Message {
    */
   async create(options: ICreateMessageOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/convs/${options.convId}/messages/`;
-    const result = await this.client.getInstance().post(url, {
-      body: options.body,
-    });
+    const result = await this.client.getInstance().post(url, options.payload);
 
     return result.data;
   }

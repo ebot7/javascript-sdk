@@ -6,7 +6,7 @@ export interface IGetExternalConversationOptions {
 
 export interface IUpdateExternalConversationOptions
   extends IGetExternalConversationOptions {
-  body: string | unknown;
+  payload: unknown;
 }
 
 export class ExternalConversation {
@@ -131,9 +131,7 @@ export class ExternalConversation {
    */
   async patch(options: IUpdateExternalConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/external-convs/${options.externalId}`;
-    const result = await this.client.getInstance().patch(url, {
-      body: options.body,
-    });
+    const result = await this.client.getInstance().patch(url, options.payload);
 
     return result.data;
   }
