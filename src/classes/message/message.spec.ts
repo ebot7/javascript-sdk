@@ -37,7 +37,7 @@ describe('test Message client class', () => {
       };
 
       await message.list({ ...params, botId });
-      expect(mock).toBeCalledWith(`bots/${botId}/messages/`, {
+      expect(mock).toBeCalledWith(`/bots/${botId}/messages/`, {
         params: params,
       });
     });
@@ -52,7 +52,7 @@ describe('test Message client class', () => {
     it('should be called with correct path and parameters', async () => {
       const params = { botId, messageId };
       await message.get(params);
-      expect(mock).toBeCalledWith(`bots/${botId}/messages/${messageId}`);
+      expect(mock).toBeCalledWith(`/bots/${botId}/messages/${messageId}`);
     });
   });
 
@@ -63,9 +63,27 @@ describe('test Message client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = { botId, convId };
-      await message.listByConversation(params);
-      expect(mock).toBeCalledWith(`bots/${botId}/convs/${convId}/messages`);
+      const created = new Date();
+      const updated = new Date();
+      updated.setDate(created.getDate() + 1);
+      const externalId = 'myTestExtCovId';
+
+      const params = {
+        isGreeting: true,
+        answerId: 'answer-id',
+        seqInConv: 'seqInConv',
+        externalId: externalId,
+        botStatus: 'published',
+        createdAt: created.toISOString(),
+        updatedAt: updated.toISOString(),
+        offset: 0,
+        limit: 10,
+      };
+
+      await message.listByConversation({ ...params, botId, convId });
+      expect(mock).toBeCalledWith(`/bots/${botId}/convs/${convId}/messages`, {
+        params,
+      });
     });
   });
 
@@ -80,12 +98,12 @@ describe('test Message client class', () => {
       const params = { botId, messageId, convId };
       await message.getByConversation(params);
       expect(mock).toBeCalledWith(
-        `bots/${botId}/convs/${convId}/messages/${messageId}`
+        `/bots/${botId}/convs/${convId}/messages/${messageId}`
       );
     });
   });
 
-  describe('test conversation create api method', () => {
+  describe('test message create api method', () => {
     const botId = 'myTestBotId';
     const convId = 'myTestCovId';
     const mock = jest.spyOn(client.getInstance(), 'post');
@@ -97,7 +115,7 @@ describe('test Message client class', () => {
       };
       await message.create({ ...params, botId, convId });
       expect(mock).toBeCalledWith(
-        `bots/${botId}/convs/${convId}/messages/`,
+        `/bots/${botId}/convs/${convId}/messages/`,
         params
       );
     });
