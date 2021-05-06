@@ -110,13 +110,19 @@ describe('test Message client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        body: 'some well formatted body json',
+      const payload = {
+        body: 'Test message',
+        source: 'visitor',
       };
-      await message.create({ ...params, botId, convId });
+      const params = {
+        botId,
+        convId,
+        payload,
+      };
+      await message.create(params);
       expect(mock).toBeCalledWith(
         `/bots/${botId}/convs/${convId}/messages/`,
-        params
+        payload
       );
     });
   });

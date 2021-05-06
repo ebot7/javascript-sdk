@@ -34,17 +34,20 @@ describe('test External Conversation client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        body: 'some well formatted body json',
+      const payload = {
+        body: 'Test message',
+        source: 'visitor',
       };
-      await conversation.patch({
-        ...params,
+      const params = {
         botId,
         externalId,
-      });
+        payload,
+      };
+
+      await conversation.patch(params);
       expect(mock).toBeCalledWith(
         `/bots/${botId}/external-convs/${externalId}`,
-        params
+        payload
       );
     });
   });

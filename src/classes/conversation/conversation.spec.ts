@@ -53,11 +53,18 @@ describe('test Conversation client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        body: 'some well formatted body json',
+      const payload = {
+        needsInteraction: false,
+        isArchived: false,
+        isVisitorBanned: false,
       };
-      await conversation.create({ ...params, botId });
-      expect(mock).toBeCalledWith(`/bots/${botId}/convs`, params);
+      const params = {
+        botId,
+        payload,
+      };
+
+      await conversation.create(params);
+      expect(mock).toBeCalledWith(`/bots/${botId}/convs`, payload);
     });
   });
 
@@ -68,15 +75,19 @@ describe('test Conversation client class', () => {
     mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
-      const params = {
-        body: 'some well formatted body json',
+      const payload = {
+        needsInteraction: false,
+        isArchived: false,
+        isVisitorBanned: false,
       };
-      await conversation.patch({
-        ...params,
+      const params = {
         botId,
         convId,
-      });
-      expect(mock).toBeCalledWith(`/bots/${botId}/convs/${convId}`, params);
+        payload,
+      };
+
+      await conversation.patch(params);
+      expect(mock).toBeCalledWith(`/bots/${botId}/convs/${convId}`, payload);
     });
   });
 });
