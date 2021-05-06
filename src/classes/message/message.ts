@@ -109,7 +109,7 @@ export class Message {
       },
     });
 
-    return result.data.items;
+    return result.data;
   }
 
   /**
@@ -168,7 +168,7 @@ export class Message {
     const url = `bots/${options.botId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
-    return result.data.item;
+    return result.data;
   }
 
   /**
@@ -230,7 +230,7 @@ export class Message {
     const url = `bots/${options.botId}/convs/${options.convId}/messages`;
     const result = await this.client.getInstance().get(url);
 
-    return result.data.items;
+    return result.data;
   }
 
   /**
@@ -298,7 +298,7 @@ export class Message {
     const url = `bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
-    return result.data.item;
+    return result.data;
   }
 
   /**
@@ -365,6 +365,6 @@ export class Message {
       body: options.body,
     });
 
-    return result.data.item;
+    return result.data;
   }
 }

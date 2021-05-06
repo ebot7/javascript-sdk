@@ -14,7 +14,7 @@ describe('test Conversation client class', () => {
 
   describe('test conversation list api method', () => {
     const mock = jest.spyOn(client.getInstance(), 'get');
-    mock.mockReturnValueOnce(Promise.resolve({ data: [] }));
+    mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
       const created = new Date();

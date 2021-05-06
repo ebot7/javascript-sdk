@@ -14,7 +14,7 @@ describe('test Bot client class', () => {
 
   describe('test bot list api method', () => {
     const mock = jest.spyOn(client.getInstance(), 'get');
-    mock.mockReturnValueOnce(Promise.resolve({ data: [] }));
+    mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
       const params = { offset: 0, limit: 10 };

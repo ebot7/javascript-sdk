@@ -14,7 +14,7 @@ describe('test Message client class', () => {
 
   describe('test message list api method', () => {
     const mock = jest.spyOn(client.getInstance(), 'get');
-    mock.mockReturnValueOnce(Promise.resolve({ data: [] }));
+    mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
       const created = new Date();
@@ -60,7 +60,7 @@ describe('test Message client class', () => {
     const botId = 'myTestBotId';
     const convId = 'myTestConvId';
     const mock = jest.spyOn(client.getInstance(), 'get');
-    mock.mockReturnValueOnce(Promise.resolve({ data: [] }));
+    mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
       const params = { botId, convId };
@@ -89,7 +89,7 @@ describe('test Message client class', () => {
     const botId = 'myTestBotId';
     const convId = 'myTestCovId';
     const mock = jest.spyOn(client.getInstance(), 'post');
-    mock.mockReturnValueOnce(Promise.resolve({ data: [] }));
+    mock.mockReturnValueOnce(Promise.resolve({ data: {} }));
 
     it('should be called with correct path and parameters', async () => {
       const params = {

@@ -24,7 +24,7 @@ export class Bot {
    * Fetches list of botIds.
    *
    * @param {IListBotOptions} options - Instance of IListBotOptions
-   * @returns {Promise<Array<string>>} List of bot Ids
+   * @returns {Promise<object>} List of bot Ids
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -83,14 +83,14 @@ export class Bot {
       },
     });
 
-    return result.data.items;
+    return result.data;
   }
 
   /**
    * Gets bot object for supplied botId
    *
    * @param {IGetBotOptions} options - Instance of IGetBotOptions
-   * @returns {Promise<Bot>} Single bot object
+   * @returns {Promise<object>} Single bot object
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -137,6 +137,6 @@ export class Bot {
     const url = `/bots/${options.botId}`;
     const result = await this.client.getInstance().get(url);
 
-    return result.data.item;
+    return result.data;
   }
 }

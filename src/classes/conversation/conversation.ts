@@ -130,7 +130,7 @@ export class Conversation {
       },
     });
 
-    return result.data.items;
+    return result.data;
   }
 
   /**
@@ -189,7 +189,7 @@ export class Conversation {
     const url = `/bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.getInstance().get(url);
 
-    return result.data.item;
+    return result.data;
   }
 
   /**
@@ -250,7 +250,7 @@ export class Conversation {
       body: options.body,
     });
 
-    return result.data.item;
+    return result.data;
   }
 
   /**
@@ -317,6 +317,6 @@ export class Conversation {
       body: options.body,
     });
 
-    return result.data.item;
+    return result.data;
   }
 }

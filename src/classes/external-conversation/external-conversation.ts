@@ -72,7 +72,7 @@ export class ExternalConversation {
     const url = `/bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.getInstance().get(url);
 
-    return result.data.item;
+    return result.data;
   }
 
   /**
@@ -141,6 +141,6 @@ export class ExternalConversation {
       body: options.body,
     });
 
-    return result.data.item;
+    return result.data;
   }
 }
