@@ -19,7 +19,7 @@ describe('test Bot client class', () => {
     it('should be called with correct path and parameters', async () => {
       const params = { offset: 0, limit: 10 };
       await bot.list(params);
-      expect(mock).toBeCalledWith('v1/bots/', { params });
+      expect(mock).toBeCalledWith('/bots/', { params });
     });
   });
 
@@ -31,7 +31,7 @@ describe('test Bot client class', () => {
     it('should be called with correct path and parameters', async () => {
       const params = { botId };
       await bot.get(params);
-      expect(mock).toBeCalledWith(`v1/bots/${botId}`);
+      expect(mock).toBeCalledWith(`/bots/${botId}`);
     });
   });
 });

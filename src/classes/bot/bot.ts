@@ -28,7 +28,7 @@ export class Bot {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async list(options: IListBotOptions = {}): Promise<Array<string>> {
-    const url = 'v1/bots/';
+    const url = '/bots/';
     const result = await this.client.getInstance().get(url, {
       params: {
         offset: options?.offset,
@@ -47,7 +47,7 @@ export class Bot {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async get(options: IGetBotOptions): Promise<BotType> {
-    const url = `v1/bots/${options.botId}`;
+    const url = `/bots/${options.botId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data.item;

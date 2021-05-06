@@ -30,7 +30,7 @@ describe('test Conversation client class', () => {
         limit: 10,
       };
       await conversation.list({ ...params, botId });
-      expect(mock).toBeCalledWith(`v1/bots/${botId}/convs`, { params });
+      expect(mock).toBeCalledWith(`/bots/${botId}/convs`, { params });
     });
   });
 
@@ -43,7 +43,7 @@ describe('test Conversation client class', () => {
     it('should be called with correct path and parameters', async () => {
       const params = { botId, convId };
       await conversation.get(params);
-      expect(mock).toBeCalledWith(`v1/bots/${botId}/convs/${convId}`);
+      expect(mock).toBeCalledWith(`/bots/${botId}/convs/${convId}`);
     });
   });
 
@@ -57,7 +57,7 @@ describe('test Conversation client class', () => {
         body: 'some well formatted body json',
       };
       await conversation.create({ ...params, botId });
-      expect(mock).toBeCalledWith(`v1/bots/${botId}/convs`, params);
+      expect(mock).toBeCalledWith(`/bots/${botId}/convs`, params);
     });
   });
 
@@ -76,7 +76,7 @@ describe('test Conversation client class', () => {
         botId,
         convId,
       });
-      expect(mock).toBeCalledWith(`v1/bots/${botId}/convs/${convId}`, params);
+      expect(mock).toBeCalledWith(`/bots/${botId}/convs/${convId}`, params);
     });
   });
 });

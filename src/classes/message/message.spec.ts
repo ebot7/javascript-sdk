@@ -37,7 +37,7 @@ describe('test Message client class', () => {
       };
 
       await message.list({ ...params, botId });
-      expect(mock).toBeCalledWith(`v1/bots/${botId}/messages/`, {
+      expect(mock).toBeCalledWith(`bots/${botId}/messages/`, {
         params: params,
       });
     });
@@ -52,7 +52,7 @@ describe('test Message client class', () => {
     it('should be called with correct path and parameters', async () => {
       const params = { botId, messageId };
       await message.get(params);
-      expect(mock).toBeCalledWith(`v1/bots/${botId}/messages/${messageId}`);
+      expect(mock).toBeCalledWith(`bots/${botId}/messages/${messageId}`);
     });
   });
 
@@ -65,7 +65,7 @@ describe('test Message client class', () => {
     it('should be called with correct path and parameters', async () => {
       const params = { botId, convId };
       await message.listByConversation(params);
-      expect(mock).toBeCalledWith(`v1/bots/${botId}/convs/${convId}/messages`);
+      expect(mock).toBeCalledWith(`bots/${botId}/convs/${convId}/messages`);
     });
   });
 
@@ -80,7 +80,7 @@ describe('test Message client class', () => {
       const params = { botId, messageId, convId };
       await message.getByConversation(params);
       expect(mock).toBeCalledWith(
-        `v1/bots/${botId}/convs/${convId}/messages/${messageId}`
+        `bots/${botId}/convs/${convId}/messages/${messageId}`
       );
     });
   });
@@ -97,7 +97,7 @@ describe('test Message client class', () => {
       };
       await message.create({ ...params, botId, convId });
       expect(mock).toBeCalledWith(
-        `v1/bots/${botId}/convs/${convId}/messages/`,
+        `bots/${botId}/convs/${convId}/messages/`,
         params
       );
     });
