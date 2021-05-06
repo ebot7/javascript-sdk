@@ -13,8 +13,7 @@ export interface IListMessageOptions {
   offset?: number;
   limit?: number;
 }
-export interface IListMessageByConversationOptions {
-  botId: string;
+export interface IListMessageByConversationOptions extends IListMessageOptions {
   convId: string;
 }
 export interface IGetMessageOptions {
@@ -95,7 +94,7 @@ export class Message {
    *       - Messages
    */
   async list(options: IListMessageOptions): Promise<unknown> {
-    const url = `bots/${options.botId}/messages/`;
+    const url = `/bots/${options.botId}/messages/`;
     const result = await this.client.getInstance().get(url, {
       params: {
         isGreeting: options?.isGreeting,
@@ -167,7 +166,7 @@ export class Message {
    *       - Messages
    */
   async get(options: IGetMessageOptions): Promise<unknown> {
-    const url = `bots/${options.botId}/messages/${options.messageId}`;
+    const url = `/bots/${options.botId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data;
@@ -229,8 +228,21 @@ export class Message {
   async listByConversation(
     options: IListMessageByConversationOptions
   ): Promise<unknown> {
-    const url = `bots/${options.botId}/convs/${options.convId}/messages`;
-    const result = await this.client.getInstance().get(url);
+    const url = `/bots/${options.botId}/convs/${options.convId}/messages`;
+    const result = await this.client.getInstance().get(url, {
+      params: {
+        isGreeting: options?.isGreeting,
+        answerId: options?.answerId,
+        seqInConv: options?.seqInConv,
+        externalId: options?.externalId,
+        botStatus: options?.botStatus,
+        filter: options?.filter,
+        createdAt: options?.createdAt,
+        updatedAt: options?.updatedAt,
+        offset: options?.offset,
+        limit: options?.limit,
+      },
+    });
 
     return result.data;
   }
@@ -297,7 +309,7 @@ export class Message {
   async getByConversation(
     options: IGetMessageByConversationOptions
   ): Promise<unknown> {
-    const url = `bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
+    const url = `/bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
     return result.data;
@@ -362,7 +374,7 @@ export class Message {
    *       - Messages
    */
   async create(options: ICreateMessageOptions): Promise<unknown> {
-    const url = `bots/${options.botId}/convs/${options.convId}/messages/`;
+    const url = `/bots/${options.botId}/convs/${options.convId}/messages/`;
     const result = await this.client.getInstance().post(url, {
       body: options.body,
     });
