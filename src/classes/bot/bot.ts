@@ -21,10 +21,10 @@ export class Bot {
   constructor(private readonly client: Client) {}
 
   /**
-   * Fetches list of botIds.
+   * Gets an object having a property [items] which is a list of bot Ids.
    *
    * @param {IListBotOptions} options - Instance of IListBotOptions
-   * @returns {Promise<object>} List of bot Ids
+   * @returns {Promise<unknown>} An object having a property [items] which is a list of bot Ids
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -32,7 +32,7 @@ export class Bot {
    *   get:
    *     operationId: findManyBots
    *     summary: List bots
-   *     description: Get a list of bot ids for which the current application which is enabled.
+   *     description: Gets an object having a property [items] which is a list of bot Ids.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -74,7 +74,7 @@ export class Bot {
    *     tags:
    *       - Bots
    */
-  async list(options: IListBotOptions = {}): Promise<Array<string>> {
+  async list(options: IListBotOptions = {}): Promise<unknown> {
     const url = '/bots/';
     const result = await this.client.getInstance().get(url, {
       params: {
@@ -87,10 +87,10 @@ export class Bot {
   }
 
   /**
-   * Gets bot object for supplied botId
+   * Gets an object having a property [item] which is a single bot details.
    *
    * @param {IGetBotOptions} options - Instance of IGetBotOptions
-   * @returns {Promise<object>} Single bot object
+   * @returns {Promise<unknown>} An object having a property [item] which is a single bot details
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -98,7 +98,7 @@ export class Bot {
    *   get:
    *     operationId: findSingleBot
    *     summary: Get bot
-   *     description: Get a single bot details.
+   *     description: Gets an object having a property [item] which is a single bot details.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -133,7 +133,7 @@ export class Bot {
    *       - Bots
    *
    */
-  async get(options: IGetBotOptions): Promise<BotType> {
+  async get(options: IGetBotOptions): Promise<unknown> {
     const url = `/bots/${options.botId}`;
     const result = await this.client.getInstance().get(url);
 

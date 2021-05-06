@@ -15,10 +15,10 @@ export class ExternalConversation {
   constructor(private readonly client: Client) {}
 
   /**
-   *  Gets an active conversation for bot with botId by its externalId
+   *  Gets an active external conversation for bot with botId by its externalId
    *
    * @param {IGetExternalConversationOptions} options - Instance of IGetExternalConversationOptions
-   * @returns {Promise<ConversationType>} Single conversation object
+   * @returns {Promise<unknown>} An object having a property [item] which is a single external conversation object.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -26,7 +26,7 @@ export class ExternalConversation {
    *   get:
    *     operationId: findSingleExternalConversation
    *     summary: Get conversation by external ID
-   *     description: Get an active conversation for a given bot by its external ID.
+   *     description: Gets an active external conversation for a given bot by its external ID.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -66,9 +66,7 @@ export class ExternalConversation {
    *     tags:
    *       - External Conversations
    */
-  async get(
-    options: IGetExternalConversationOptions
-  ): Promise<ConversationType> {
+  async get(options: IGetExternalConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.getInstance().get(url);
 
@@ -76,10 +74,10 @@ export class ExternalConversation {
   }
 
   /**
-   * Updates an existing conversation by its botId and externalId
+   * Updates an existing external conversation of a bot for supplied botId and externalId.
    *
    * @param {IUpdateExternalConversationOptions} options - Instance of IUpdateExternalConversationOptions
-   * @returns {Promise<ConversationType>} Single conversation object
+   * @returns {Promise<unknown>} An object having a property [item] which is a single external conversation object.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -87,7 +85,7 @@ export class ExternalConversation {
    *   patch:
    *    operationId: updateExternalConversation
    *    summary: Update conversation by external ID
-   *    description: Update an existing conversation by its external ID.
+   *    description: Updates an existing external conversation of a bot for supplied botId and externalId.
    *    produces:
    *    - "application/json"
    *    consumes:
@@ -133,9 +131,7 @@ export class ExternalConversation {
    *    tags:
    *      - External Conversations
    */
-  async patch(
-    options: IUpdateExternalConversationOptions
-  ): Promise<ConversationType> {
+  async patch(options: IUpdateExternalConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.getInstance().patch(url, {
       body: options.body,

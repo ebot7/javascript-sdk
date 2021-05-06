@@ -48,10 +48,10 @@ export class Message {
   constructor(private readonly client: Client) {}
 
   /**
-   * Fetches list of messages based on botId.
+   * Gets an object having a property [items] which is a list of messages based on botId.
    *
    * @param {IListMessageOptions} options - Instance of IListConversationOptions
-   * @returns {Promise<Array<MessageType>>} List of message object type
+   * @returns {Promise<unknown>} An object having a property [items] which is a list of message object type
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -59,7 +59,7 @@ export class Message {
    *   get:
    *     operationId: findManyMessages
    *     summary: List messages
-   *     description: List all messages of a bot.
+   *     description: Gets an object having a property [items] which is a list of messages based on botId.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -93,7 +93,7 @@ export class Message {
    *     tags:
    *       - Messages
    */
-  async list(options: IListMessageOptions): Promise<Array<MessageType>> {
+  async list(options: IListMessageOptions): Promise<unknown> {
     const url = `bots/${options.botId}/messages/`;
     const result = await this.client.getInstance().get(url, {
       params: {
@@ -113,10 +113,10 @@ export class Message {
   }
 
   /**
-   *  Gets message object for supplied botId and messageId
+   *  Gets an object having a property [item] which is a single message object for supplied botId and messageId
    *
    * @param {IGetMessageOptions} options - Instance of IGetMessageOptions
-   * @returns {Promise<MessageType>} Single message object
+   * @returns {Promise<unknown>} An object having a property [item] which is a single message object
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -124,7 +124,7 @@ export class Message {
    *   get:
    *     operationId: findSingleMessage
    *     summary: Get message
-   *     description: Get a single message.
+   *     description: Gets an object having a property [item] which is a single message object for supplied botId and messageId.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -164,7 +164,7 @@ export class Message {
    *     tags:
    *       - Messages
    */
-  async get(options: IGetMessageOptions): Promise<MessageType> {
+  async get(options: IGetMessageOptions): Promise<unknown> {
     const url = `bots/${options.botId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
@@ -172,10 +172,10 @@ export class Message {
   }
 
   /**
-   * Fetches list of all messages for conversation with [convId]
+   * Gets an object having a property [items] which is list of all messages for conversation with [convId]
    *
    * @param {IListMessageByConversationOptions} options - Instance of IListMessageByConversationOptions
-   * @returns {Promise<Array<MessageType>>} List of message object type for conversation with convId
+   * @returns {Promise<unknown>} An object having a property [items] which is list of all messages for conversation with [convId]
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -183,7 +183,7 @@ export class Message {
    *   get:
    *     operationId: findMessagesByConversation
    *     summary: List messages by conversation
-   *     description: List messages for a conversation.
+   *     description: Gets an object having a property [items] which is list of all messages for conversation with [convId]
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -226,7 +226,7 @@ export class Message {
    */
   async listByConversation(
     options: IListMessageByConversationOptions
-  ): Promise<Array<MessageType>> {
+  ): Promise<unknown> {
     const url = `bots/${options.botId}/convs/${options.convId}/messages`;
     const result = await this.client.getInstance().get(url);
 
@@ -234,10 +234,10 @@ export class Message {
   }
 
   /**
-   * Gets message object for conversation based on supplied botId, convId and messageId
+   *Gets an object having a property [item] which is a message object for conversation based on supplied botId, convId and messageId
    *
    * @param {IGetMessageByConversationOptions} options - Instance of IGetMessageByConversationOptions
-   * @returns {Promise<MessageType>} Single message object type for conversation with convId
+   * @returns {Promise<unknown>} An object having a property [item] which is a message object for conversation based on supplied botId, convId and messageId.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -245,7 +245,7 @@ export class Message {
    *   get:
    *     operationId: findSingleMessageInConversation
    *     summary: Get message by conversation
-   *     description: Get a single message in a conversation.
+   *     description: Gets an object having a property [item] which is a message object for conversation based on supplied botId, convId and messageId.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -294,7 +294,7 @@ export class Message {
    */
   async getByConversation(
     options: IGetMessageByConversationOptions
-  ): Promise<Array<MessageType>> {
+  ): Promise<unknown> {
     const url = `bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
     const result = await this.client.getInstance().get(url);
 
@@ -305,7 +305,7 @@ export class Message {
    * Create a new message for a conversation against bot [botId] and conversation [convId].
    *
    * @param {ICreateMessageOptions} options - Instance of ICreateMessageOptions
-   * @returns {Promise<MessageType>} Single message object type for conversation with convId
+   * @returns {Promise<unknown>} An object having a property [item] which is a message object type for conversation with convId and botId
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -313,7 +313,7 @@ export class Message {
    *   post:
    *     operationId: CreateMessage
    *     summary: Create message
-   *     description: Create a new message for a conversation.
+   *     description: Create a new message for a conversation against bot [botId] and conversation [convId].
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -359,7 +359,7 @@ export class Message {
    *     tags:
    *       - Messages
    */
-  async create(options: ICreateMessageOptions): Promise<MessageType> {
+  async create(options: ICreateMessageOptions): Promise<unknown> {
     const url = `bots/${options.botId}/convs/${options.convId}/messages/`;
     const result = await this.client.getInstance().post(url, {
       body: options.body,

@@ -44,10 +44,10 @@ export class Conversation {
   constructor(private readonly client: Client) {}
 
   /**
-   * Fetches list of conversations based on botId.
+   * Gets an object having a property [items] which is a list of conversations.
    *
    * @param {IListConversationOptions} options - Instance of IListConversationOptions
-   * @returns {Promise<Array<ConversationType>>} List of conversation object type
+   * @returns {Promise<unknown>} An object having a property [items] which is a list of conversations.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -55,7 +55,7 @@ export class Conversation {
    *   get:
    *     operationId: findManyConversations
    *     summary: List conversations
-   *     description: List conversations for a given bot.
+   *     description: Gets an object having a property [item] which is a list of conversations.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -117,9 +117,7 @@ export class Conversation {
    *     tags:
    *       - Conversations
    */
-  async list(
-    options: IListConversationOptions
-  ): Promise<Array<ConversationType>> {
+  async list(options: IListConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/convs`;
     const result = await this.client.getInstance().get(url, {
       params: {
@@ -134,10 +132,10 @@ export class Conversation {
   }
 
   /**
-   *  Gets conversation object for supplied botId and convId
+   * Gets an object having a property [item] which is a single conversation object for supplied botId and convId
    *
    * @param {IGetConversationOptions} options - Instance of IGetConversationOptions
-   * @returns {Promise<ConversationType>} Single conversation object
+   * @returns {Promise<unknown} An object having a property [item] which is a single conversation object for supplied botId and convId
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -145,7 +143,7 @@ export class Conversation {
    *   get:
    *     operationId: findSingleConversation
    *     summary: Get conversation
-   *     description: Get a conversation for a given bot.
+   *     description: Gets an object having a property [item] which is a single conversation object for supplied botId and convId
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -185,7 +183,7 @@ export class Conversation {
    *     tags:
    *       - Conversations
    */
-  async get(options: IGetConversationOptions): Promise<ConversationType> {
+  async get(options: IGetConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.getInstance().get(url);
 
@@ -196,7 +194,7 @@ export class Conversation {
    * Creates a new conversation for bot with botId
    *
    * @param {ICreateConversationOptions} options - Instance of ICreateConversationOptions
-   * @returns {Promise<ConversationType>} Single conversation object
+   * @returns {Promise<unknown>} An object having a property [item] which is a single conversation object.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -204,7 +202,7 @@ export class Conversation {
    *   post:
    *     operationId: createConversation
    *     summary: Create conversation
-   *     description: Create a new conversation.
+   *     description: Creates a new conversation for bot with botId.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -244,7 +242,7 @@ export class Conversation {
    *     tags:
    *       - Conversations
    */
-  async create(options: ICreateConversationOptions): Promise<ConversationType> {
+  async create(options: ICreateConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/convs`;
     const result = await this.client.getInstance().post(url, {
       body: options.body,
@@ -254,10 +252,10 @@ export class Conversation {
   }
 
   /**
-   * Updates a conversation for convId and bot with botId
+   * Updates an existing conversation for supplied botId and convId.
    *
    * @param {IUpdateConversationOptions} options - Instance of IUpdateConversationOptions
-   * @returns {Promise<ConversationType>} Single conversation object
+   * @returns {Promise<unknown>} An object having a property [item] which is a single conversation object.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -265,7 +263,7 @@ export class Conversation {
    *   patch:
    *     operationId: updateConversation
    *     summary: Update conversation
-   *     description: Update an existing conversation.
+   *     description: Updates an existing conversation for supplied botId and convId.
    *     produces:
    *     - "application/json"
    *     consumes:
@@ -311,7 +309,7 @@ export class Conversation {
    *     tags:
    *       - Conversations
    */
-  async patch(options: IUpdateConversationOptions): Promise<ConversationType> {
+  async patch(options: IUpdateConversationOptions): Promise<unknown> {
     const url = `/bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.getInstance().patch(url, {
       body: options.body,
