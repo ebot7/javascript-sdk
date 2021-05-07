@@ -1,8 +1,6 @@
-# Ebot7 Javascript SDK
+# Ebot7 SDK
 
-ebot7 Javascript SDK. 
-
-This is the ebot7 Javascript Software Development Kit (JS SDK) Package.
+This is the ebot7 Software Development Kit (JS SDK) Package.
 
 The JS SDK is a thin client for developing and testing aspects of the ebot7 Application.
 

@@ -38,7 +38,17 @@ describe('test Message client class', () => {
 
       await message.list({ ...params, botId });
       expect(mock).toBeCalledWith(`/bots/${botId}/messages/`, {
-        params: params,
+        params: {
+          'filter[isGreeting]': params?.isGreeting,
+          'filter[answerId]': params?.answerId,
+          'filter[seqInConv]': params?.seqInConv,
+          'filter[externalId]': params?.externalId,
+          'filter[botStatus]': params?.botStatus,
+          'filter[createdAt]': params?.createdAt,
+          'filter[updatedAt]': params?.updatedAt,
+          'page[offset]': params?.offset,
+          'page[limit]': params?.limit,
+        },
       });
     });
   });
@@ -82,7 +92,17 @@ describe('test Message client class', () => {
 
       await message.listByConversation({ ...params, botId, convId });
       expect(mock).toBeCalledWith(`/bots/${botId}/convs/${convId}/messages`, {
-        params,
+        params: {
+          'filter[isGreeting]': params?.isGreeting,
+          'filter[answerId]': params?.answerId,
+          'filter[seqInConv]': params?.seqInConv,
+          'filter[externalId]': params?.externalId,
+          'filter[botStatus]': params?.botStatus,
+          'filter[createdAt]': params?.createdAt,
+          'filter[updatedAt]': params?.updatedAt,
+          'page[offset]': params?.offset,
+          'page[limit]': params?.limit,
+        },
       });
     });
   });

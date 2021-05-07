@@ -30,7 +30,14 @@ describe('test Conversation client class', () => {
         limit: 10,
       };
       await conversation.list({ ...params, botId });
-      expect(mock).toBeCalledWith(`/bots/${botId}/convs`, { params });
+      expect(mock).toBeCalledWith(`/bots/${botId}/convs`, {
+        params: {
+          'filter[createdAt]': params?.createdAt,
+          'filter[updatedAt]': params?.updatedAt,
+          'page[offset]': params?.offset,
+          'page[limit]': params?.limit,
+        },
+      });
     });
   });
 

@@ -7,7 +7,6 @@ export interface IListMessageOptions {
   seqInConv?: string;
   externalId?: string;
   botStatus?: string;
-  filter?: string;
   createdAt?: string;
   updatedAt?: string;
   offset?: number;
@@ -98,16 +97,15 @@ export class Message {
     const url = `/bots/${options.botId}/messages/`;
     const result = await this.client.getInstance().get(url, {
       params: {
-        isGreeting: options?.isGreeting,
-        answerId: options?.answerId,
-        seqInConv: options?.seqInConv,
-        externalId: options?.externalId,
-        botStatus: options?.botStatus,
-        filter: options?.filter,
-        createdAt: options?.createdAt,
-        updatedAt: options?.updatedAt,
-        offset: options?.offset,
-        limit: options?.limit,
+        'filter[isGreeting]': options?.isGreeting,
+        'filter[answerId]': options?.answerId,
+        'filter[seqInConv]': options?.seqInConv,
+        'filter[externalId]': options?.externalId,
+        'filter[botStatus]': options?.botStatus,
+        'filter[createdAt]': options?.createdAt,
+        'filter[updatedAt]': options?.updatedAt,
+        'page[offset]': options?.offset,
+        'page[limit]': options?.limit,
       },
     });
 
@@ -232,16 +230,15 @@ export class Message {
     const url = `/bots/${options.botId}/convs/${options.convId}/messages`;
     const result = await this.client.getInstance().get(url, {
       params: {
-        isGreeting: options?.isGreeting,
-        answerId: options?.answerId,
-        seqInConv: options?.seqInConv,
-        externalId: options?.externalId,
-        botStatus: options?.botStatus,
-        filter: options?.filter,
-        createdAt: options?.createdAt,
-        updatedAt: options?.updatedAt,
-        offset: options?.offset,
-        limit: options?.limit,
+        'filter[isGreeting]': options?.isGreeting,
+        'filter[answerId]': options?.answerId,
+        'filter[seqInConv]': options?.seqInConv,
+        'filter[externalId]': options?.externalId,
+        'filter[botStatus]': options?.botStatus,
+        'filter[createdAt]': options?.createdAt,
+        'filter[updatedAt]': options?.updatedAt,
+        'page[offset]': options?.offset,
+        'page[limit]': options?.limit,
       },
     });
 

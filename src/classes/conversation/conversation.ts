@@ -122,11 +122,10 @@ export class Conversation {
     const url = `/bots/${options.botId}/convs`;
     const result = await this.client.getInstance().get(url, {
       params: {
-        createdAt: options?.createdAt,
-        updatedAt: options?.updatedAt,
-        filter: options?.filter,
-        offset: options?.offset,
-        limit: options?.limit,
+        'filter[createdAt]': options?.createdAt,
+        'filter[updatedAt]': options?.updatedAt,
+        'page[offset]': options?.offset,
+        'page[limit]': options?.limit,
       },
     });
 
