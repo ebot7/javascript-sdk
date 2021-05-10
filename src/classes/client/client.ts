@@ -1,7 +1,12 @@
 import Axios, { AxiosInstance } from 'axios';
 
 import { IClientOptions } from './client.interface';
-import config from './config.json';
+
+const config = {
+  baseURL: process.env?.AP_TEST_PUBLIC_API_URL || '',
+  bearerToken: process.env.AP_TEST_APPLICATION_KEY || '',
+  timeout: parseInt(process.env?.TIMEOUT || '') || 5000,
+};
 
 export class Client {
   private axios: AxiosInstance;
