@@ -70,7 +70,7 @@ export enum MessageSource {
 export type MessageInputPayload = {
   body: string;
   source: MessageSource;
-  promptOptions: MessagePromptOption;
+  promptOptions?: MessagePromptOption;
 };
 
 export type MessagePromptOption = {
