@@ -1,6 +1,6 @@
 {
   "name": "@ebot7/sdk",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "ebot7 SDK. A thin client for developing and testing aspects of the ebot7 Application.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
