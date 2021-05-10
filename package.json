@@ -10,7 +10,13 @@
     "url": "https://github.com/ebot7/javascript-sdk"
   },
   "license": "MIT",
-  "keywords": ["Javascript", "SDK", "ebot7", "Typescript", "npm"],
+  "keywords": [
+    "Javascript",
+    "SDK",
+    "ebot7",
+    "Typescript",
+    "npm"
+  ],
   "scripts": {
     "build": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",

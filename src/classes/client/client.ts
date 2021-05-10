@@ -1,11 +1,7 @@
-import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosInstance } from 'axios';
 
+import { IClientOptions } from './client.interface';
 import config from './config.json';
-
-export interface IClientOptions extends AxiosRequestConfig {
-  readonly bearerToken: string;
-  readonly baseURL: string;
-}
 
 export class Client {
   private axios: AxiosInstance;
@@ -20,6 +16,10 @@ export class Client {
     this.axios = this.create(this.options);
   }
 
+  /**
+   * Gets the underlying instantiated AxiosInstance
+   * @returns {AxiosInstance} Instantiated AxiosInstance
+   */
   public getInstance(): AxiosInstance {
     if (this.axios) {
       return this.axios;
@@ -29,6 +29,11 @@ export class Client {
     }
   }
 
+  /**
+   * Creates and returns an AxiosInstance
+   * @param {IClientOptions} options - Instance of ClientOptions}
+   * @returns {AxiosInstance} Instance of AxiosInstance
+   */
   private create(options: IClientOptions): AxiosInstance {
     return Axios.create({
       ...options,

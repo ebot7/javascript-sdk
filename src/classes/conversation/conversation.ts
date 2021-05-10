@@ -1,46 +1,13 @@
 import { Client } from '../client';
 
-export interface IListConversationOptions {
-  botId: string;
-  createdAt?: string;
-  updatedAt?: string;
-  filter?: string;
-  offset?: number;
-  limit?: number;
-}
-export interface IGetConversationOptions {
-  botId: string;
-  convId: string;
-}
-
-export interface ICreateConversationOptions {
-  botId: string;
-  payload: unknown;
-}
-
-export interface IUpdateConversationOptions extends ICreateConversationOptions {
-  convId: string;
-}
-
-export type ConversationType = {
-  id: string;
-  body: string;
-  disableAutopilot: true;
-  embedOrigin: string;
-  lastMessageAt: string;
-  lastMessageBody: string;
-  firstMessageByVisitorAt: string;
-  isLastMessageByVisitor: boolean;
-  convNumber: number;
-  messageCount: number;
-  agent: string;
-  orgId: string;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-  externalData: Array<string>;
-};
-
+import {
+  ConversationApiOutput,
+  ConversationListApiOutput,
+  ICreateConversationOptions,
+  IGetConversationOptions,
+  IListConversationOptions,
+  IUpdateConversationOptions,
+} from './conversation.interface';
 export class Conversation {
   constructor(private readonly client: Client) {}
 
@@ -48,7 +15,7 @@ export class Conversation {
    * Gets an object having a property [items] which is a list of conversations.
    *
    * @param {IListConversationOptions} options - Instance of IListConversationOptions
-   * @returns {Promise<unknown>} An object having a property [items] which is a list of conversations.
+   * @returns {Promise<ConversationListApiOutput>} An object having a property [items] which is a list of conversations.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -118,7 +85,9 @@ export class Conversation {
    *     tags:
    *       - Conversations
    */
-  async list(options: IListConversationOptions): Promise<unknown> {
+  async list(
+    options: IListConversationOptions
+  ): Promise<ConversationListApiOutput> {
     const url = `/bots/${options.botId}/convs`;
     const result = await this.client.getInstance().get(url, {
       params: {
@@ -136,7 +105,7 @@ export class Conversation {
    * Gets an object having a property [item] which is a single conversation object for supplied botId and convId
    *
    * @param {IGetConversationOptions} options - Instance of IGetConversationOptions
-   * @returns {Promise<unknown} An object having a property [item] which is a single conversation object for supplied botId and convId
+   * @returns {Promise<ConversationApiOutput>} An object having a property [item] which is a single conversation object for supplied botId and convId
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -184,7 +153,7 @@ export class Conversation {
    *     tags:
    *       - Conversations
    */
-  async get(options: IGetConversationOptions): Promise<unknown> {
+  async get(options: IGetConversationOptions): Promise<ConversationApiOutput> {
     const url = `/bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.getInstance().get(url);
 
@@ -195,7 +164,7 @@ export class Conversation {
    * Creates a new conversation for bot with botId
    *
    * @param {ICreateConversationOptions} options - Instance of ICreateConversationOptions
-   * @returns {Promise<unknown>} An object having a property [item] which is a single conversation object.
+   * @returns {Promise<ConversationApiOutput>} An object having a property [item] which is a single conversation object.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -243,7 +212,9 @@ export class Conversation {
    *     tags:
    *       - Conversations
    */
-  async create(options: ICreateConversationOptions): Promise<unknown> {
+  async create(
+    options: ICreateConversationOptions
+  ): Promise<ConversationApiOutput> {
     const url = `/bots/${options.botId}/convs`;
     const result = await this.client.getInstance().post(url, options.payload);
 
@@ -254,7 +225,7 @@ export class Conversation {
    * Updates an existing conversation for supplied botId and convId.
    *
    * @param {IUpdateConversationOptions} options - Instance of IUpdateConversationOptions
-   * @returns {Promise<unknown>} An object having a property [item] which is a single conversation object.
+   * @returns {Promise<ConversationApiOutput>} An object having a property [item] which is a single conversation object.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -308,7 +279,9 @@ export class Conversation {
    *     tags:
    *       - Conversations
    */
-  async patch(options: IUpdateConversationOptions): Promise<unknown> {
+  async patch(
+    options: IUpdateConversationOptions
+  ): Promise<ConversationApiOutput> {
     const url = `/bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.getInstance().patch(url, options.payload);
 

@@ -1,13 +1,10 @@
 import { Client } from '../client';
-export interface IGetExternalConversationOptions {
-  botId: string;
-  externalId: string; //The unique ID of the conversation in the external platform
-}
 
-export interface IUpdateExternalConversationOptions
-  extends IGetExternalConversationOptions {
-  payload: unknown;
-}
+import {
+  ConversationApiOutput,
+  IGetExternalConversationOptions,
+  IUpdateExternalConversationOptions,
+} from './conversation.interface';
 
 export class ExternalConversation {
   constructor(private readonly client: Client) {}
@@ -16,7 +13,7 @@ export class ExternalConversation {
    *  Gets an active external conversation for bot with botId by its externalId
    *
    * @param {IGetExternalConversationOptions} options - Instance of IGetExternalConversationOptions
-   * @returns {Promise<unknown>} An object having a property [item] which is a single external conversation object.
+   * @returns {Promise<ConversationApiOutput>} An object having a property [item] which is a single external conversation object.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -64,7 +61,9 @@ export class ExternalConversation {
    *     tags:
    *       - External Conversations
    */
-  async get(options: IGetExternalConversationOptions): Promise<unknown> {
+  async get(
+    options: IGetExternalConversationOptions
+  ): Promise<ConversationApiOutput> {
     const url = `/bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.getInstance().get(url);
 
@@ -75,7 +74,7 @@ export class ExternalConversation {
    * Updates an existing external conversation of a bot for supplied botId and externalId.
    *
    * @param {IUpdateExternalConversationOptions} options - Instance of IUpdateExternalConversationOptions
-   * @returns {Promise<unknown>} An object having a property [item] which is a single external conversation object.
+   * @returns {Promise<ConversationApiOutput>} An object having a property [item] which is a single external conversation object.
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -129,7 +128,9 @@ export class ExternalConversation {
    *    tags:
    *      - External Conversations
    */
-  async patch(options: IUpdateExternalConversationOptions): Promise<unknown> {
+  async patch(
+    options: IUpdateExternalConversationOptions
+  ): Promise<ConversationApiOutput> {
     const url = `/bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.getInstance().patch(url, options.payload);
 

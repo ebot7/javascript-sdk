@@ -35,8 +35,9 @@ describe('test External Conversation client class', () => {
 
     it('should be called with correct path and parameters', async () => {
       const payload = {
-        body: 'Test message',
-        source: 'visitor',
+        needsInteraction: false,
+        isArchived: false,
+        isVisitorBanned: false,
       };
       const params = {
         botId,

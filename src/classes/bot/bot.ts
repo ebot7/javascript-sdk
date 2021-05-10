@@ -1,22 +1,11 @@
 import { Client } from '../client';
 
-export interface IListBotOptions {
-  offset?: number;
-  limit?: number;
-}
-
-export interface IGetBotOptions {
-  botId: string;
-}
-
-export type BotType = {
-  id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  orgId: string;
-};
-
+import {
+  BotListApiOutput,
+  BotApiOutput,
+  IGetBotOptions,
+  IListBotOptions,
+} from './bot.interface';
 export class Bot {
   constructor(private readonly client: Client) {}
 
@@ -24,7 +13,7 @@ export class Bot {
    * Gets an object having a property [items] which is a list of bot Ids.
    *
    * @param {IListBotOptions} options - Instance of IListBotOptions
-   * @returns {Promise<unknown>} An object having a property [items] which is a list of bot Ids
+   * @returns {Promise<BotListApiOutput>} An object having a property [items] which is a list of bot Ids
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -74,7 +63,7 @@ export class Bot {
    *     tags:
    *       - Bots
    */
-  async list(options: IListBotOptions = {}): Promise<unknown> {
+  async list(options: IListBotOptions = {}): Promise<BotListApiOutput> {
     const url = '/bots/';
     const result = await this.client.getInstance().get(url, {
       params: {
@@ -90,7 +79,7 @@ export class Bot {
    * Gets an object having a property [item] which is a single bot details.
    *
    * @param {IGetBotOptions} options - Instance of IGetBotOptions
-   * @returns {Promise<unknown>} An object having a property [item] which is a single bot details
+   * @returns {Promise<BotApiOutput>} An object having a property [item] which is a single bot details
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    *
    * @openapi
@@ -133,7 +122,7 @@ export class Bot {
    *       - Bots
    *
    */
-  async get(options: IGetBotOptions): Promise<unknown> {
+  async get(options: IGetBotOptions): Promise<BotApiOutput> {
     const url = `/bots/${options.botId}`;
     const result = await this.client.getInstance().get(url);
 

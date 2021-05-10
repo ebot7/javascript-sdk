@@ -1,6 +1,7 @@
 import { Client } from '../client';
 
 import { Message } from './message';
+import { MessageSource } from './message.interface';
 
 const client = new Client();
 const message = new Message(client);
@@ -27,7 +28,7 @@ describe('test Message client class', () => {
       const params = {
         isGreeting: true,
         answerId: 'answer-id',
-        seqInConv: 'seqInConv',
+        seqInConv: 1,
         externalId: externalId,
         botStatus: 'published',
         createdAt: created.toISOString(),
@@ -81,7 +82,7 @@ describe('test Message client class', () => {
       const params = {
         isGreeting: true,
         answerId: 'answer-id',
-        seqInConv: 'seqInConv',
+        seqInConv: 1,
         externalId: externalId,
         botStatus: 'published',
         createdAt: created.toISOString(),
@@ -132,7 +133,12 @@ describe('test Message client class', () => {
     it('should be called with correct path and parameters', async () => {
       const payload = {
         body: 'Test message',
-        source: 'visitor',
+        source: MessageSource.VISITOR,
+        promptOptions: {
+          body: 'Option A',
+          href: 'http://example.com',
+          isFile: false,
+        },
       };
       const params = {
         botId,
