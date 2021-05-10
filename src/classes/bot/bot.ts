@@ -1,8 +1,8 @@
 import { Client } from '../client';
 
 import {
-  BotListApiOutput,
   BotApiOutput,
+  BotListApiOutput,
   IGetBotOptions,
   IListBotOptions,
 } from './bot.interface';
