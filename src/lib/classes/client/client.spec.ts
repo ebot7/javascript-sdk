@@ -33,7 +33,7 @@ describe('test bot list api method', () => {
   
   it('should be called with correct path', async () => {
     client.get(`v1/bots/`);
-    expect(mock).toBeCalledWith(`v1/bots/`);
+    expect(mock).toBeCalledWith(`v1/bots/`, {});
   });
 
   it('should be called with correct pagination', async () => {
@@ -48,6 +48,7 @@ describe('test bot list api method', () => {
     });
   });
 
+
   it('should throw a 400 if malformed filter query param is provided', async () => {
     
     const request = client.axiosRef.get(
@@ -55,5 +56,5 @@ describe('test bot list api method', () => {
     );
     await expectPublicApi(request).toThrowStatusCode(400);
   });
-  
+
 });
