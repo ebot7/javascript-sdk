@@ -57,14 +57,14 @@ export class Client {
     url: string,
     config?: IClientRequestConfig
   ): Promise<R> {
-    return this.axios.post(url, this.mapToAxiosConfig(config) )
+    return this.axios.post(url, this.mapToAxiosConfig(config));
   }
 
   public patch<T = any, R = AxiosResponse<T>>(
     url: string,
     config?: IClientRequestConfig
   ): Promise<R> {
-    return this.axios.patch(url, this.mapToAxiosConfig(config) )
+    return this.axios.patch(url, this.mapToAxiosConfig(config));
   }
 
   public get axiosRef(): AxiosInstance {

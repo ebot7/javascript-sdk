@@ -6,7 +6,7 @@ export function expectPublicApi(request: Promise<any>) {
       await request;
 
       throw new Error(
-        `Axios Request is expected to throw an error code "${statusCode}"`,
+        `Axios Request is expected to throw an error code "${statusCode}"`
       );
     } catch (error) {
       expect(typeof error).toBe('object');
@@ -44,7 +44,7 @@ export function expectPublicApi(request: Promise<any>) {
   };
 
   const toHavePagingState = async (
-    expected: { total?: number; offset?: number; limit?: number } = {},
+    expected: { total?: number; offset?: number; limit?: number } = {}
   ) => {
     const response = await request;
     const result = response.data;
@@ -68,7 +68,7 @@ export function expectPublicApi(request: Promise<any>) {
   };
 
   const toRespondConversationEntity = async (
-    expected: Record<string, any> = {},
+    expected: Record<string, any> = {}
   ) => {
     const response = await request;
     const result = response.data;
@@ -101,7 +101,7 @@ export function expectPublicApi(request: Promise<any>) {
     }
     if (expected.firstMessageByVisitorAt) {
       expect(result.item.firstMessageByVisitorAt).toBe(
-        expected.firstMessageByVisitorAt,
+        expected.firstMessageByVisitorAt
       );
     }
     if (expected.convNumber) {
