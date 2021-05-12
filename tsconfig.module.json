@@ -3,7 +3,11 @@
   "compilerOptions": {
     "target": "esnext",
     "outDir": "build/module",
-    "module": "esnext"
+    "module": "esnext",
+    "lib": ["es2017"],
+    
+    "types": ["node", "jest"],
+    "typeRoots": ["node_modules/@types", "src/types"]
   },
   "exclude": [
     "node_modules/**"
