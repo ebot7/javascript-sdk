@@ -1,43 +1,30 @@
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import {
+  IEbot7ClientConfig,
+  IEbot7ClientRequestConfig,
+  IEbot7ClientRequestFilter,
+  IEbot7ClientRequestPaging,
+} from './client.interfaces';
 
-export interface IClientConfig extends AxiosRequestConfig {
-  readonly bearerToken: string;
-  readonly baseURL?: string;
-}
-
-export type IClientRequestFilter = Record<
-  string,
-  string | number | boolean | Date
->;
-
-export interface IClientRequestPaging {
-  offset?: number;
-  limit?: number;
-}
-export interface IClientRequestConfig extends AxiosRequestConfig {
-  filter?: IClientRequestFilter;
-  paging?: IClientRequestPaging;
-}
-
-export class Client {
-  public static DEFAULT_CONFIG: Partial<IClientConfig> = {
+export class Ebot7Client {
+  public static DEFAULT_CONFIG: Partial<IEbot7ClientConfig> = {
     baseURL: `https://public-api.e-bot7.de/`,
   };
 
   private axios: AxiosInstance;
 
-  protected config: IClientConfig;
+  protected config: AxiosRequestConfig;
 
-  constructor(config: IClientConfig) {
+  constructor({ bearerToken, ...config }: IEbot7ClientConfig) {
     this.config = {
-      ...Client.DEFAULT_CONFIG,
+      ...Ebot7Client.DEFAULT_CONFIG,
       ...config,
     };
 
     this.axios = Axios.create({
       ...this.config,
       headers: {
-        Authorization: `Bearer ${this.config?.bearerToken}`,
+        Authorization: `Bearer ${bearerToken}`,
         'Content-Type': 'application/json',
         Accept: 'application/json',
         ...(this.config?.headers || {}),
@@ -46,23 +33,26 @@ export class Client {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public get<T = any, R = AxiosResponse<T>>(
     url: string,
-    config?: IClientRequestConfig
+    config?: IEbot7ClientRequestConfig
   ): Promise<R> {
     return this.axios.get(url, this.mapToAxiosConfig(config));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public post<T = any, R = AxiosResponse<T>>(
     url: string,
-    config?: IClientRequestConfig
+    config?: IEbot7ClientRequestConfig
   ): Promise<R> {
     return this.axios.post(url, this.mapToAxiosConfig(config));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public patch<T = any, R = AxiosResponse<T>>(
     url: string,
-    config?: IClientRequestConfig
+    config?: IEbot7ClientRequestConfig
   ): Promise<R> {
     return this.axios.patch(url, this.mapToAxiosConfig(config));
   }
@@ -75,7 +65,7 @@ export class Client {
     filter,
     paging,
     ...config
-  }: IClientRequestConfig = {}): AxiosRequestConfig | undefined {
+  }: IEbot7ClientRequestConfig = {}): AxiosRequestConfig | undefined {
     const parsedFilter = this.parseFilter(filter);
     const parsedPaging = this.parsePaging(paging);
     let params = config.params;
@@ -101,7 +91,7 @@ export class Client {
   }
 
   protected parseFilter(
-    filter: IClientRequestFilter | undefined
+    filter: IEbot7ClientRequestFilter | undefined
   ): Record<string, string | number | Date | boolean> | undefined {
     return filter
       ? Reflect.ownKeys(filter).reduce((acc, key) => {
@@ -122,7 +112,7 @@ export class Client {
       : undefined;
   }
 
-  protected parsePaging(paging: IClientRequestPaging | undefined) {
+  protected parsePaging(paging: IEbot7ClientRequestPaging | undefined) {
     let parsedPaging: Record<string, string> | undefined = undefined;
 
     if (paging?.limit !== undefined) {

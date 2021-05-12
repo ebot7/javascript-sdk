@@ -1,18 +1,18 @@
-import { Client } from './client';
+import { Ebot7Client } from './client';
 
 const MOCK_TOKEN =
   'xapp-607952a149247f795d7304f9-48863fb0b20dec2b9a8a585fc63a6b8017cbab48';
 const TEST_BASE_URL = 'http://localhost:3006/';
 //const BOT_ID = "603fbbac6a31143d3034f313";
 
-const client = new Client({
+const client = new Ebot7Client({
   bearerToken: MOCK_TOKEN || '',
   baseURL: TEST_BASE_URL,
 });
 
 describe('test Client class, methods and proper axios configuration', () => {
   it('should be an instance of a Client class', () => {
-    expect(client).toBeInstanceOf(Client);
+    expect(client).toBeInstanceOf(Ebot7Client);
   });
   it('should have a getInstance method that always returns an AxiosInstance object', () => {
     expect(client.axiosRef).toBeInstanceOf(Object);
