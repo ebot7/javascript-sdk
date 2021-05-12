@@ -1,11 +1,11 @@
 import { expectPublicApi } from '../../helpers/client/axios-client-helper';
 
 import { Client } from './client';
-import 'dotenv/config';
 
-const BOT_ID = process.env.SDK_TEST_BOT_ID;
-const MOCK_TOKEN = process.env.SDK_MOCK_BEARER_TOKEN;
-const TEST_BASE_URL = process.env.SDK_TEST_BASE_URL;
+const BOT_ID = '603fbbac6a31143d3034f313';
+const MOCK_TOKEN =
+  'xapp-607952a149247f795d7304f9-48863fb0b20dec2b9a8a585fc63a6b8017cbab48';
+const TEST_BASE_URL = 'http://localhost:3006/';
 
 const client = new Client({
   bearerToken: MOCK_TOKEN || '',

@@ -24,7 +24,8 @@
         "sandboxed",
         "transpiled",
         "typedoc",
-        "untracked"
+        "untracked",
+        "xapp"
     ],
     "flagWords": [],
     "ignorePaths": [
