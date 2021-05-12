@@ -61,7 +61,7 @@ describe('Ebot7BotClient', () => {
   describe('findOne()', () => {
     it('should send a request to "v1/bots/:botId"', async () => {
       const mockGet = jest.fn();
-      const mockBotId = 'meangless value';
+      const mockBotId = 'meaningless value';
       mockGet.mockResolvedValue({ items: [] });
       client.get = mockGet;
       await botClient.findOne({ botId: mockBotId });
