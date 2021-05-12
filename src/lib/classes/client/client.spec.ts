@@ -1,4 +1,5 @@
 import { expectPublicApi } from '../../helpers/client/axios-client-helper';
+
 import { Client } from './client';
 import 'dotenv/config';
 

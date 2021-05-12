@@ -14,10 +14,6 @@ export interface IClientRequestPaging {
   offset?: number;
   limit?: number;
 }
-
-export interface IClientRequestBody{
-
-}
 export interface IClientRequestConfig extends AxiosRequestConfig {
   filter?: IClientRequestFilter;
   paging?: IClientRequestPaging;
