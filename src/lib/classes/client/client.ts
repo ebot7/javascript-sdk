@@ -15,6 +15,9 @@ export interface IClientRequestPaging {
   limit?: number;
 }
 
+export interface IClientRequestBody{
+
+}
 export interface IClientRequestConfig extends AxiosRequestConfig {
   filter?: IClientRequestFilter;
   paging?: IClientRequestPaging;
@@ -52,6 +55,20 @@ export class Client {
     config?: IClientRequestConfig
   ): Promise<R> {
     return this.axios.get(url, this.mapToAxiosConfig(config));
+  }
+
+  public post<T = any, R = AxiosResponse<T>>(
+    url: string,
+    config?: IClientRequestConfig
+  ): Promise<R> {
+    return this.axios.post(url, this.mapToAxiosConfig(config) )
+  }
+
+  public patch<T = any, R = AxiosResponse<T>>(
+    url: string,
+    config?: IClientRequestConfig
+  ): Promise<R> {
+    return this.axios.patch(url, this.mapToAxiosConfig(config) )
   }
 
   public get axiosRef(): AxiosInstance {
