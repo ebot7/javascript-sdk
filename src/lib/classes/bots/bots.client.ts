@@ -1,9 +1,9 @@
-import { Ebot7Client, IClientRequestPaging } from '../client';
+import { Ebot7Client, IEbot7ClientRequestPaging } from '../client';
 import {
   IEbot7Bot,
   IEbot7BotList,
   IEbot7GetBotOptions,
-} from './bots.interface';
+} from './bots.interfaces';
 
 export class Ebot7BotClient {
   public static BASE_PATH = 'v1/bots';
@@ -18,7 +18,7 @@ export class Ebot7BotClient {
    * @throws {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   public async findMany(
-    paging: IClientRequestPaging = {}
+    paging: IEbot7ClientRequestPaging = {}
   ): Promise<IEbot7BotList> {
     const url = Ebot7BotClient.BASE_PATH;
     const result = await this.client.get(url, { paging });
