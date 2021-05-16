@@ -1,5 +1,6 @@
 import { Ebot7Client } from '../client';
 import { Ebot7MessageClient } from './messages.client';
+import { EEbot7MessageSource } from './messages.interfaces';
 
 const MOCK_BEARER_TOKEN = 'Meaningless string';
 const MOCK_BOT_ID = 'Meaningless_id';
@@ -160,18 +161,22 @@ describe('Ebot7MessageClient', () => {
 
   describe('createMessage()', () => {
     it('should send a request to "v1/bots/:botId/convs/:convId/messages"', async () => {
-      const mockPatch = jest.fn();
+      const mockPost = jest.fn();
       const mockBotId = 'meaningless_value';
       const mockConvId = 'meaningless_conv_value';
 
-      mockPatch.mockResolvedValue({ items: [] });
-      client.patch = mockPatch;
+      mockPost.mockResolvedValue({ items: [] });
+      client.patch = mockPost;
       await messageClient.create({
         botId: mockBotId,
         convId: mockConvId,
-        body: '',
+        applicationId: 'meaningless_app_id',
+        payload: {
+          body:'meaning_less',
+          source: EEbot7MessageSource.BOT
+        }
       });
-      const calledUrl = mockPatch.mock.calls[0][0];
+      const calledUrl = mockPost.mock.calls[0][0];
 
       expect(calledUrl).toBe(
         `v1/bots/${mockBotId}/convs/${mockConvId}/messages`

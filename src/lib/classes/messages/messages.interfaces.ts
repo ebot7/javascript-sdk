@@ -15,7 +15,32 @@ export interface IEbot7Message {
   updatedAt: string;
 }
 
-export interface IEbot7MessageFilter {
+export interface IEbot7PagingOutput {
+  total?: number;
+  limit?: number;
+  offset?: number;
+}
+
+export interface IEbot7MessageListFilterOutput {
+  botId?: string;
+  convId?: string;
+  isGreeting?: boolean;
+  answerId?: string;
+  seqInConv?: number;
+  botStatus?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface IEbot7MessageOutput {
+  item: IEbot7Message;
+}
+export interface IEbot7MessageListOutput {
+  items: IEbot7Message[];
+  paging: IEbot7PagingOutput;
+  filter: IEbot7MessageListFilterOutput;
+}
+export interface IEbot7MessageInputFilter {
   isGreeting?: boolean;
   answerId?: string;
   seqInConv?: number;
@@ -28,7 +53,7 @@ export interface IEbot7MessageFilter {
 export interface IEbot7GetMessagesByBotIdOptions {
   botId: string;
   paging?: IEbot7ClientRequestPaging;
-  filter?: IEbot7MessageFilter;
+  filter?: IEbot7MessageInputFilter;
 }
 
 export interface IEbot7GetMessagesByBotIdAndMessageId {
@@ -41,11 +66,24 @@ export interface IEbot7ListMessageByConversationOptions {
   convId: string;
 }
 
-export interface IEbot7CreateMessageOptions
-  extends IEbot7ListMessageByConversationOptions {
-  body: string | unknown;
+export interface IEbot7CreateMessageOptions{
+  botId: string;
+  convId: string;
+  applicationId: string;
+  payload: IEbot7CreateMessageInputPayload;
 }
 
+export interface IEbot7CreateMessageInputPayload{
+  body: string;
+  source: EEbot7MessageSource;
+  promptOptions?: IEbot7MessagePromptOption;
+}
+
+export enum EEbot7MessageSource {
+  VISITOR = 'visitor',
+  BOT = 'bot',
+  AGENT = 'agent',
+}
 export interface IEbot7GetMessageOptions {
   botId: string;
   messageId: string;
@@ -54,3 +92,9 @@ export interface IEbot7GetMessageByConversationOptions
   extends IEbot7GetMessageOptions {
   convId: string;
 }
+
+export interface IEbot7MessagePromptOption {
+  body: string;
+  href: string;
+  isFile: boolean;
+};

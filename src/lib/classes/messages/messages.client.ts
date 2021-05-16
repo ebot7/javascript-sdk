@@ -6,7 +6,9 @@ import {
   IEbot7GetMessagesByBotIdOptions,
   IEbot7ListMessageByConversationOptions,
   IEbot7Message,
-  IEbot7MessageFilter,
+  IEbot7MessageInputFilter,
+  IEbot7MessageListOutput,
+  IEbot7MessageOutput,
 } from './messages.interfaces';
 
 export class Ebot7MessageClient {
@@ -23,7 +25,7 @@ export class Ebot7MessageClient {
    */
   public async findMany(
     options: IEbot7GetMessagesByBotIdOptions
-  ): Promise<Array<IEbot7Message>> {
+  ): Promise<IEbot7MessageListOutput> {
     const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/messages`;
     const parsedFilter = this.parseFilter(options?.filter);
 
@@ -44,7 +46,7 @@ export class Ebot7MessageClient {
    */
   async findOne(
     options: IEbot7GetMessagesByBotIdAndMessageId
-  ): Promise<IEbot7Message> {
+  ): Promise<IEbot7MessageOutput> {
     const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/messages/${options.messageId}`;
     const result = await this.client.get(url);
 
@@ -60,7 +62,7 @@ export class Ebot7MessageClient {
    */
   async findManyByConversation(
     options: IEbot7ListMessageByConversationOptions
-  ): Promise<Array<IEbot7Message>> {
+  ): Promise<IEbot7MessageListOutput> {
     const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/convs/${options.convId}/messages`;
     const result = await this.client.get(url);
 
@@ -76,7 +78,7 @@ export class Ebot7MessageClient {
    */
   async findOneByConversation(
     options: IEbot7GetMessageByConversationOptions
-  ): Promise<Array<IEbot7Message>> {
+  ): Promise<IEbot7MessageOutput> {
     const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
     const result = await this.client.get(url);
 
@@ -90,22 +92,24 @@ export class Ebot7MessageClient {
    * @returns {Promise<MessageType>} Single message object type for conversation with convId
    * @throws {Forbidden} HTTP Error (403) if botId and/or convId are not correct
    */
-  async create(options: IEbot7CreateMessageOptions): Promise<IEbot7Message> {
+  async create(
+    options: IEbot7CreateMessageOptions
+  ): Promise<IEbot7MessageOutput> {
     const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/convs/${options.convId}/messages`;
-    const result = await this.client.patch(url, {
-      data: options.body,
+    const result = await this.client.post(url, {
+      data: options.payload,
     });
 
     return result.data;
   }
 
   protected parseFilter(
-    filter: IEbot7MessageFilter | undefined
+    filter: IEbot7MessageInputFilter | undefined
   ): Record<string, string | number | Date | boolean> | undefined {
     return filter
       ? Reflect.ownKeys(filter).reduce((acc, key) => {
           const filterKey = `filter[${String(key)}]`;
-          const filterValue = filter[key as keyof IEbot7MessageFilter];
+          const filterValue = filter[key as keyof IEbot7MessageInputFilter];
           if (typeof filterValue === 'string') {
             acc[filterKey] = filterValue;
           } else if (typeof filterValue === 'number') {
