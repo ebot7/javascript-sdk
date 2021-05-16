@@ -1,6 +1,7 @@
 import {
-  IEbot7Conversation,
   IEbot7ConversationFilterOptions,
+  IEbot7ConversationListOutput,
+  IEbot7ConversationOutput,
   IEbot7CreateConversationOptions,
   IEbot7GetConversationOptions,
   IEbot7ListConversationOptions,
@@ -22,13 +23,12 @@ export class Ebot7ConversationClient {
    */
   public async findMany(
     options: IEbot7ListConversationOptions
-  ): Promise<Array<IEbot7Conversation>> {
+  ): Promise<IEbot7ConversationListOutput> {
     const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs`;
-    const parsedFilter = this.parseFilter(options?.filter);
 
     const result = await this.client.get(url, {
-      ...(options.paging && { paging: options.paging }),
-      ...(parsedFilter && parsedFilter !== {} && { filter: parsedFilter }),
+      paging: options.paging,
+      filter: this.parseFilter(options?.filter),
     });
 
     return result.data;
@@ -43,7 +43,7 @@ export class Ebot7ConversationClient {
    */
   public async findOne(
     options: IEbot7GetConversationOptions
-  ): Promise<IEbot7Conversation> {
+  ): Promise<IEbot7ConversationOutput> {
     const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs/${options.convId}`;
     const result = await this.client.get(url);
 
@@ -59,10 +59,10 @@ export class Ebot7ConversationClient {
    */
   public async create(
     options: IEbot7CreateConversationOptions
-  ): Promise<IEbot7Conversation> {
+  ): Promise<IEbot7ConversationOutput> {
     const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs`;
     const result = await this.client.post(url, {
-      data: options.data,
+      data: options.payload,
     });
 
     return result.data;
@@ -77,10 +77,10 @@ export class Ebot7ConversationClient {
    */
   public async patch(
     options: IEbot7UpdateConversationOptions
-  ): Promise<IEbot7Conversation> {
+  ): Promise<IEbot7ConversationOutput> {
     const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs/${options.convId}`;
     const result = await this.client.patch(url, {
-      data: options.data,
+      data: options.payload,
     });
 
     return result.data;

@@ -127,7 +127,7 @@ describe('Ebot7ConversationClient', () => {
       client.post = mockPost;
       await conversationClient.create({
         botId: mockBotId,
-        data: '',
+        payload: {},
       });
       const calledUrl = mockPost.mock.calls[0][0];
 
@@ -146,7 +146,7 @@ describe('Ebot7ConversationClient', () => {
       await conversationClient.patch({
         botId: mockBotId,
         convId: mockConvId,
-        data: '',
+        payload: {},
       });
       const calledUrl = mockPatch.mock.calls[0][0];
 
