@@ -1,7 +1,7 @@
 import { Ebot7Client, IEbot7ClientRequestPaging } from '../client';
 import {
-  IEbot7Bot,
-  IEbot7BotList,
+  IEbot7BotListOutput,
+  IEbot7BotOutput,
   IEbot7GetBotOptions,
 } from './bots.interfaces';
 
@@ -19,7 +19,7 @@ export class Ebot7BotClient {
    */
   public async findMany(
     paging: IEbot7ClientRequestPaging = {}
-  ): Promise<IEbot7BotList> {
+  ): Promise<IEbot7BotListOutput> {
     const url = Ebot7BotClient.BASE_PATH;
     const result = await this.client.get(url, { paging });
 
@@ -33,7 +33,7 @@ export class Ebot7BotClient {
    * @returns Single bot object
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
-  async findOne(options: IEbot7GetBotOptions): Promise<IEbot7Bot> {
+  async findOne(options: IEbot7GetBotOptions): Promise<IEbot7BotOutput> {
     const url = `${Ebot7BotClient.BASE_PATH}/${options.botId}`;
     const result = await this.client.get(url);
 
