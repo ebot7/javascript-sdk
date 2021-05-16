@@ -64,7 +64,6 @@ export interface IEbot7ListMessageByConversationOptions
 export interface IEbot7CreateMessageOptions {
   botId: string;
   convId: string;
-  applicationId: string;
   payload: IEbot7CreateMessageInputPayload;
 }
 
