@@ -51,7 +51,7 @@ describe('Ebot7ExternalConversationClient', () => {
       await externalConversationClient.patch({
         botId: mockBotId,
         externalId: mockConvId,
-        data: '',
+        payload: {},
       });
       const calledUrl = mockPatch.mock.calls[0][0];
 

@@ -1,9 +1,9 @@
 import {
   IEbot7GetExternalConversationOptions,
-  IEbot7UpdateExternalConversationOptions,
+  IUpdateExternalConversationOptions,
 } from '.';
 import { Ebot7Client } from '../client';
-import { IEbot7Conversation } from '../conversations';
+import { IEbot7ConversationOutput } from '../conversations';
 
 export class Ebot7ExternalConversationClient {
   public static BASE_PATH = 'v1/bots';
@@ -11,7 +11,7 @@ export class Ebot7ExternalConversationClient {
   constructor(private readonly client: Ebot7Client) {}
 
   /**
-   *  Gets an active conversation for bot with botId by its externalId
+   *  Gets an external conversation for bot with botId by its externalId
    *
    * @param  options
    * @returns Single conversation object
@@ -19,7 +19,7 @@ export class Ebot7ExternalConversationClient {
    */
   async findOne(
     options: IEbot7GetExternalConversationOptions
-  ): Promise<IEbot7Conversation> {
+  ): Promise<IEbot7ConversationOutput> {
     const url = `${Ebot7ExternalConversationClient.BASE_PATH}/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.get(url);
 
@@ -34,11 +34,11 @@ export class Ebot7ExternalConversationClient {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async patch(
-    options: IEbot7UpdateExternalConversationOptions
-  ): Promise<IEbot7Conversation> {
+    options: IUpdateExternalConversationOptions
+  ): Promise<IEbot7ConversationOutput> {
     const url = `${Ebot7ExternalConversationClient.BASE_PATH}/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.patch(url, {
-      data: options.data,
+      data: options.payload,
     });
 
     return result.data;

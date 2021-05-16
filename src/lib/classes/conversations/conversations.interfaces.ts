@@ -52,16 +52,6 @@ export interface IEbot7ConversationPayload {
   integrations?: IEbot7ConversationExternalData[];
 }
 
-export interface IEbot7GetExternalConversationOptions {
-  botId: string;
-  externalId: string; //The unique ID of the conversation in the external platform
-}
-
-export interface IUpdateExternalConversationOptions
-  extends IEbot7GetExternalConversationOptions {
-  payload: IEbot7ConversationPayload;
-}
-
 export interface IEbot7ListConversationOptions {
   botId: string;
   paging?: IEbot7ClientRequestPaging;
