@@ -62,7 +62,10 @@ export class Ebot7MessageClient {
     options: IEbot7ListMessageByConversationOptions
   ): Promise<IEbot7MessageListOutput> {
     const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/convs/${options.convId}/messages`;
-    const result = await this.client.get(url);
+    const result = await this.client.get(url, {
+      paging: options.paging,
+      filter: this.parseFilter(options?.filter),
+    });
 
     return result.data;
   }

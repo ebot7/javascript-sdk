@@ -56,8 +56,8 @@ export interface IEbot7GetMessagesByBotIdAndMessageId {
   messageId: string;
 }
 
-export interface IEbot7ListMessageByConversationOptions {
-  botId: string;
+export interface IEbot7ListMessageByConversationOptions
+  extends IEbot7GetMessagesOptions {
   convId: string;
 }
 
