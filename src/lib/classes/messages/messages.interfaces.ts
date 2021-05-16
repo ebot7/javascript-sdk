@@ -71,7 +71,7 @@ export interface IEbot7CreateMessageOptions {
 export interface IEbot7CreateMessageInputPayload {
   body: string;
   source: EEbot7MessageSource;
-  promptOptions?: IEbot7MessagePromptOption;
+  promptOptions?: IEbot7MessagePromptOption[];
 }
 
 export enum EEbot7MessageSource {
