@@ -27,7 +27,7 @@ export interface IEbot7Conversation {
 }
 
 export interface IEbot7ConversationOutput {
-  item: IEbot7Conversation[];
+  item: IEbot7Conversation;
 }
 
 export interface IEbot7ConversationExternalData {
