@@ -3,7 +3,7 @@ import {
   IEbot7CreateMessageOptions,
   IEbot7GetMessageByConversationOptions,
   IEbot7GetMessagesByBotIdAndMessageId,
-  IEbot7GetMessagesByBotIdOptions,
+  IEbot7GetMessagesOptions,
   IEbot7ListMessageByConversationOptions,
   IEbot7MessageInputFilter,
   IEbot7MessageListOutput,
@@ -18,19 +18,18 @@ export class Ebot7MessageClient {
   /**
    * Fetches list of messages based on botId.
    *
-   * @param options IEbot7GetMessagesByBotIdOptions
+   * @param options IEbot7CreateMessageOptions
    * @returns  List of message object type
    * @throws {Forbidden} HTTP Error (403) if botId is not correct
    */
   public async findMany(
-    options: IEbot7GetMessagesByBotIdOptions
+    options: IEbot7GetMessagesOptions
   ): Promise<IEbot7MessageListOutput> {
     const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/messages`;
-    const parsedFilter = this.parseFilter(options?.filter);
 
     const result = await this.client.get(url, {
-      ...(options.paging && { paging: options.paging }),
-      ...(parsedFilter && parsedFilter !== {} && { filter: parsedFilter }),
+      paging: options.paging,
+      filter: this.parseFilter(options?.filter),
     });
 
     return result.data;

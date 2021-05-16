@@ -1,4 +1,5 @@
 import { IEbot7ClientRequestPaging } from '../client';
+import { IEbot7PagingOutput } from '../common';
 
 export interface IEbot7Message {
   id: string;
@@ -13,12 +14,6 @@ export interface IEbot7Message {
   seqInConv: 0;
   createdAt: string;
   updatedAt: string;
-}
-
-export interface IEbot7PagingOutput {
-  total?: number;
-  limit?: number;
-  offset?: number;
 }
 
 export interface IEbot7MessageListFilterOutput {
@@ -50,7 +45,7 @@ export interface IEbot7MessageInputFilter {
   updatedAt?: Date;
 }
 
-export interface IEbot7GetMessagesByBotIdOptions {
+export interface IEbot7GetMessagesOptions {
   botId: string;
   paging?: IEbot7ClientRequestPaging;
   filter?: IEbot7MessageInputFilter;
