@@ -66,14 +66,14 @@ export interface IEbot7ListMessageByConversationOptions {
   convId: string;
 }
 
-export interface IEbot7CreateMessageOptions{
+export interface IEbot7CreateMessageOptions {
   botId: string;
   convId: string;
   applicationId: string;
   payload: IEbot7CreateMessageInputPayload;
 }
 
-export interface IEbot7CreateMessageInputPayload{
+export interface IEbot7CreateMessageInputPayload {
   body: string;
   source: EEbot7MessageSource;
   promptOptions?: IEbot7MessagePromptOption;
@@ -97,4 +97,4 @@ export interface IEbot7MessagePromptOption {
   body: string;
   href: string;
   isFile: boolean;
-};
+}

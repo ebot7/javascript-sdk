@@ -166,15 +166,15 @@ describe('Ebot7MessageClient', () => {
       const mockConvId = 'meaningless_conv_value';
 
       mockPost.mockResolvedValue({ items: [] });
-      client.patch = mockPost;
+      client.post = mockPost;
       await messageClient.create({
         botId: mockBotId,
         convId: mockConvId,
         applicationId: 'meaningless_app_id',
         payload: {
-          body:'meaning_less',
-          source: EEbot7MessageSource.BOT
-        }
+          body: 'meaning_less',
+          source: EEbot7MessageSource.BOT,
+        },
       });
       const calledUrl = mockPost.mock.calls[0][0];
 

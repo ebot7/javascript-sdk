@@ -5,7 +5,6 @@ import {
   IEbot7GetMessagesByBotIdAndMessageId,
   IEbot7GetMessagesByBotIdOptions,
   IEbot7ListMessageByConversationOptions,
-  IEbot7Message,
   IEbot7MessageInputFilter,
   IEbot7MessageListOutput,
   IEbot7MessageOutput,
