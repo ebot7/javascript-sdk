@@ -1,7 +1,7 @@
 {
-  "name": "@bot7/sdk",
+  "name": "@ebot7/sdk",
   "version": "0.0.14",
-  "description": "ebot7 Javascript SDK. A think client for developing and testing aspects of the ebot7 Application.",
+  "description": "ebot7 SDK. A think client for developing and testing aspects of the ebot7 Application.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
