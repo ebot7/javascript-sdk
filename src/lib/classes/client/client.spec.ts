@@ -2,7 +2,7 @@ import { Ebot7Client } from './client';
 
 const MOCK_TOKEN =
   'xapp-607952a149247f795d7304f9-48863fb0b20dec2b9a8a585fc63a6b8017cbab48';
-const TEST_BASE_URL = 'http://localhost:3006/';
+const TEST_BASE_URL = 'http://example.com';
 //const BOT_ID = "603fbbac6a31143d3034f313";
 
 const client = new Ebot7Client({

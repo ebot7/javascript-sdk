@@ -44,17 +44,21 @@ export class Ebot7Client {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public post<T = any, R = AxiosResponse<T>>(
     url: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data?: any,
     config?: IEbot7ClientRequestConfig
   ): Promise<R> {
-    return this.axios.post(url, this.mapToAxiosConfig(config));
+    return this.axios.post(url, data, this.mapToAxiosConfig(config));
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public patch<T = any, R = AxiosResponse<T>>(
     url: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data?: any,
     config?: IEbot7ClientRequestConfig
   ): Promise<R> {
-    return this.axios.patch(url, this.mapToAxiosConfig(config));
+    return this.axios.patch(url, data, this.mapToAxiosConfig(config));
   }
 
   public get axiosRef(): AxiosInstance {
