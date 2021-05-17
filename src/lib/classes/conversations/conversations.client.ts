@@ -61,9 +61,7 @@ export class Ebot7ConversationClient {
     options: IEbot7CreateConversationOptions
   ): Promise<IEbot7ConversationOutput> {
     const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs`;
-    const result = await this.client.post(url, {
-      data: options.payload,
-    });
+    const result = await this.client.post(url, options.payload);
 
     return result.data;
   }
@@ -79,9 +77,7 @@ export class Ebot7ConversationClient {
     options: IEbot7UpdateConversationOptions
   ): Promise<IEbot7ConversationOutput> {
     const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs/${options.convId}`;
-    const result = await this.client.patch(url, {
-      data: options.payload,
-    });
+    const result = await this.client.patch(url, options.payload);
 
     return result.data;
   }

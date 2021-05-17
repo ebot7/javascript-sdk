@@ -37,9 +37,7 @@ export class Ebot7ExternalConversationClient {
     options: IUpdateExternalConversationOptions
   ): Promise<IEbot7ConversationOutput> {
     const url = `${Ebot7ExternalConversationClient.BASE_PATH}/${options.botId}/external-convs/${options.externalId}`;
-    const result = await this.client.patch(url, {
-      data: options.payload,
-    });
+    const result = await this.client.patch(url, options.payload);
 
     return result.data;
   }

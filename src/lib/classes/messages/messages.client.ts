@@ -97,9 +97,7 @@ export class Ebot7MessageClient {
     options: IEbot7CreateMessageOptions
   ): Promise<IEbot7MessageOutput> {
     const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/convs/${options.convId}/messages`;
-    const result = await this.client.post(url, {
-      data: options.payload,
-    });
+    const result = await this.client.post(url, options.payload);
 
     return result.data;
   }
