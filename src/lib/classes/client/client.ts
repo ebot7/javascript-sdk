@@ -11,6 +11,8 @@ export class Ebot7Client {
     baseURL: `https://public-api.e-bot7.de/`,
   };
 
+  private static API_VERSION = 'v1';
+
   private axios: AxiosInstance;
 
   protected config: AxiosRequestConfig;
@@ -20,6 +22,12 @@ export class Ebot7Client {
       ...Ebot7Client.DEFAULT_CONFIG,
       ...config,
     };
+
+    if (this.config.baseURL?.endsWith('/')) {
+      this.config.baseURL += `${Ebot7Client.API_VERSION}/`;
+    } else {
+      this.config.baseURL += `/${Ebot7Client.API_VERSION}/`;
+    }
 
     this.axios = Axios.create({
       ...this.config,

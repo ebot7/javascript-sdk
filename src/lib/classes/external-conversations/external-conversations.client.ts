@@ -6,8 +6,6 @@ import { Ebot7Client } from '../client';
 import { IEbot7ConversationOutput } from '../conversations';
 
 export class Ebot7ExternalConversationClient {
-  public static BASE_PATH = 'v1/bots';
-
   constructor(private readonly client: Ebot7Client) {}
 
   /**
@@ -20,7 +18,7 @@ export class Ebot7ExternalConversationClient {
   async findOne(
     options: IEbot7GetExternalConversationOptions
   ): Promise<IEbot7ConversationOutput> {
-    const url = `${Ebot7ExternalConversationClient.BASE_PATH}/${options.botId}/external-convs/${options.externalId}`;
+    const url = `bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.get(url);
 
     return result.data;
@@ -36,7 +34,7 @@ export class Ebot7ExternalConversationClient {
   async patch(
     options: IUpdateExternalConversationOptions
   ): Promise<IEbot7ConversationOutput> {
-    const url = `${Ebot7ExternalConversationClient.BASE_PATH}/${options.botId}/external-convs/${options.externalId}`;
+    const url = `bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.patch(url, options.payload);
 
     return result.data;

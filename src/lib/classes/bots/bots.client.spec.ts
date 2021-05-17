@@ -19,14 +19,14 @@ describe('Ebot7BotClient', () => {
   });
 
   describe('findMany()', () => {
-    it('should send a request to "v1/bots"', async () => {
+    it('should send a request to "bots"', async () => {
       const mockGet = jest.fn();
       mockGet.mockResolvedValue({ items: [] });
       client.get = mockGet;
       await botClient.findMany();
       const calledUrl = mockGet.mock.calls[0][0];
 
-      expect(calledUrl).toBe('v1/bots');
+      expect(calledUrl).toBe('bots');
     });
 
     it('should send paging with "limit"', async () => {
@@ -59,7 +59,7 @@ describe('Ebot7BotClient', () => {
   });
 
   describe('findOne()', () => {
-    it('should send a request to "v1/bots/:botId"', async () => {
+    it('should send a request to "bots/:botId"', async () => {
       const mockGet = jest.fn();
       const mockBotId = 'meaningless value';
       mockGet.mockResolvedValue({ items: [] });
@@ -67,7 +67,7 @@ describe('Ebot7BotClient', () => {
       await botClient.findOne({ botId: mockBotId });
       const calledUrl = mockGet.mock.calls[0][0];
 
-      expect(calledUrl).toBe(`v1/bots/${mockBotId}`);
+      expect(calledUrl).toBe(`bots/${mockBotId}`);
     });
   });
 });
