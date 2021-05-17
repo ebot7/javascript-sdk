@@ -170,7 +170,6 @@ describe('Ebot7MessageClient', () => {
       await messageClient.create({
         botId: mockBotId,
         convId: mockConvId,
-        applicationId: 'meaningless_app_id',
         payload: {
           body: 'meaning_less',
           source: EEbot7MessageSource.BOT,

@@ -27,7 +27,7 @@ export interface IEbot7Conversation {
 }
 
 export interface IEbot7ConversationOutput {
-  item: IEbot7Conversation[];
+  item: IEbot7Conversation;
 }
 
 export interface IEbot7ConversationExternalData {
@@ -50,16 +50,6 @@ export interface IEbot7ConversationPayload {
   isVisitorBanned?: boolean;
   genesysInteractionUUID?: string;
   integrations?: IEbot7ConversationExternalData[];
-}
-
-export interface IEbot7GetExternalConversationOptions {
-  botId: string;
-  externalId: string; //The unique ID of the conversation in the external platform
-}
-
-export interface IUpdateExternalConversationOptions
-  extends IEbot7GetExternalConversationOptions {
-  payload: IEbot7ConversationPayload;
 }
 
 export interface IEbot7ListConversationOptions {

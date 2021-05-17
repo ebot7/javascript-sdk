@@ -56,22 +56,21 @@ export interface IEbot7GetMessagesByBotIdAndMessageId {
   messageId: string;
 }
 
-export interface IEbot7ListMessageByConversationOptions {
-  botId: string;
+export interface IEbot7ListMessageByConversationOptions
+  extends IEbot7GetMessagesOptions {
   convId: string;
 }
 
 export interface IEbot7CreateMessageOptions {
   botId: string;
   convId: string;
-  applicationId: string;
   payload: IEbot7CreateMessageInputPayload;
 }
 
 export interface IEbot7CreateMessageInputPayload {
   body: string;
   source: EEbot7MessageSource;
-  promptOptions?: IEbot7MessagePromptOption;
+  promptOptions?: IEbot7MessagePromptOption[];
 }
 
 export enum EEbot7MessageSource {
