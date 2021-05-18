@@ -1,7 +1,9 @@
 name: E-bot7 SDK publish
-on: 
-  release:
-    types: [created]
+on:
+  release: [created]
+#  push:
+#    branches:
+#      - master
 
 jobs:
   publish:
@@ -13,7 +15,6 @@ jobs:
           node-version: '12.x'
       - run: npm install
       - run: npm test
-      - uses: JS-DevTools/npm-publish@v2
+      - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_PUBLISH_SECRET }}
-          dry-run: true
