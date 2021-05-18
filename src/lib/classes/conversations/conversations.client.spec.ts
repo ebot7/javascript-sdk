@@ -20,14 +20,14 @@ describe('Ebot7ConversationClient', () => {
   });
 
   describe('findMany()', () => {
-    it('should send a request to "v1/bots/:botId/convs', async () => {
+    it('should send a request to "bots/:botId/convs', async () => {
       const mockGet = jest.fn();
       mockGet.mockResolvedValue({ items: [] });
       client.get = mockGet;
       await conversationClient.findMany({ botId: MOCK_BOT_ID });
       const calledUrl = mockGet.mock.calls[0][0];
 
-      expect(calledUrl).toBe(`v1/bots/${MOCK_BOT_ID}/convs`);
+      expect(calledUrl).toBe(`bots/${MOCK_BOT_ID}/convs`);
     });
 
     it('should send paging with "limit"', async () => {
@@ -101,7 +101,7 @@ describe('Ebot7ConversationClient', () => {
   });
 
   describe('findOne()', () => {
-    it('should send a request to "v1/bots/:botId/convs/:convId"', async () => {
+    it('should send a request to "bots/:botId/convs/:convId"', async () => {
       const mockGet = jest.fn();
       const mockBotId = 'meaningless_value';
       const mockConvId = 'meaningless_conv_value';
@@ -114,12 +114,12 @@ describe('Ebot7ConversationClient', () => {
       });
       const calledUrl = mockGet.mock.calls[0][0];
 
-      expect(calledUrl).toBe(`v1/bots/${mockBotId}/convs/${mockConvId}`);
+      expect(calledUrl).toBe(`bots/${mockBotId}/convs/${mockConvId}`);
     });
   });
 
   describe('createConversation()', () => {
-    it('should send a request to "v1/bots/:botId/convs"', async () => {
+    it('should send a request to "bots/:botId/convs"', async () => {
       const mockPost = jest.fn();
       const mockBotId = 'meaningless_value';
 
@@ -131,12 +131,12 @@ describe('Ebot7ConversationClient', () => {
       });
       const calledUrl = mockPost.mock.calls[0][0];
 
-      expect(calledUrl).toBe(`v1/bots/${mockBotId}/convs`);
+      expect(calledUrl).toBe(`bots/${mockBotId}/convs`);
     });
   });
 
   describe('patchConversation()', () => {
-    it('should send a request to "v1/bots/:botId/convs/:convId"', async () => {
+    it('should send a request to "bots/:botId/convs/:convId"', async () => {
       const mockPatch = jest.fn();
       const mockBotId = 'meaningless_value';
       const mockConvId = 'meaningless_conv_value';
@@ -150,7 +150,7 @@ describe('Ebot7ConversationClient', () => {
       });
       const calledUrl = mockPatch.mock.calls[0][0];
 
-      expect(calledUrl).toBe(`v1/bots/${mockBotId}/convs/${mockConvId}`);
+      expect(calledUrl).toBe(`bots/${mockBotId}/convs/${mockConvId}`);
     });
   });
 });

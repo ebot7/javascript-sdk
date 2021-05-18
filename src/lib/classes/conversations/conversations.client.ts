@@ -10,8 +10,6 @@ import {
 import { Ebot7Client } from '../client';
 
 export class Ebot7ConversationClient {
-  public static BASE_PATH = 'v1/bots';
-
   constructor(private readonly client: Ebot7Client) {}
 
   /**
@@ -24,7 +22,7 @@ export class Ebot7ConversationClient {
   public async findMany(
     options: IEbot7ListConversationOptions
   ): Promise<IEbot7ConversationListOutput> {
-    const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs`;
+    const url = `bots/${options.botId}/convs`;
 
     const result = await this.client.get(url, {
       paging: options.paging,
@@ -44,7 +42,7 @@ export class Ebot7ConversationClient {
   public async findOne(
     options: IEbot7GetConversationOptions
   ): Promise<IEbot7ConversationOutput> {
-    const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs/${options.convId}`;
+    const url = `bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.get(url);
 
     return result.data;
@@ -60,7 +58,7 @@ export class Ebot7ConversationClient {
   public async create(
     options: IEbot7CreateConversationOptions
   ): Promise<IEbot7ConversationOutput> {
-    const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs`;
+    const url = `bots/${options.botId}/convs`;
     const result = await this.client.post(url, options.payload);
 
     return result.data;
@@ -76,7 +74,7 @@ export class Ebot7ConversationClient {
   public async patch(
     options: IEbot7UpdateConversationOptions
   ): Promise<IEbot7ConversationOutput> {
-    const url = `${Ebot7ConversationClient.BASE_PATH}/${options.botId}/convs/${options.convId}`;
+    const url = `bots/${options.botId}/convs/${options.convId}`;
     const result = await this.client.patch(url, options.payload);
 
     return result.data;

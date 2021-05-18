@@ -27,8 +27,8 @@ describe('test Client class, methods and proper axios configuration', () => {
 describe('test bot list api method', () => {
   const mock = jest.spyOn(client.axiosRef, 'get');
   it('should be called with correct path', async () => {
-    client.get(`v1/bots/`);
-    expect(mock).toBeCalledWith(`v1/bots/`, {});
+    client.get(`bots/`);
+    expect(mock).toBeCalledWith(`bots/`, {});
   });
 
   it('should be called with correct pagination', async () => {
@@ -36,14 +36,14 @@ describe('test bot list api method', () => {
       offset: 0,
       limit: 10,
     };
-    client.get(`v1/bots/`, { paging });
+    client.get(`bots/`, { paging });
 
     const params = {
       'page[offset]': paging.offset.toString(),
       'page[limit]': paging.limit.toString(),
     };
 
-    expect(mock).toBeCalledWith(`v1/bots/`, { params });
+    expect(mock).toBeCalledWith(`bots/`, { params });
   });
 
   it('should be called with correct filters', async () => {
@@ -53,14 +53,14 @@ describe('test bot list api method', () => {
       createdAt: now,
       updatedAt: then,
     };
-    client.get(`v1/bots/`, { filter });
+    client.get(`bots/`, { filter });
 
     const params = {
       'filter[createdAt]': filter.createdAt.toISOString(),
       'filter[updatedAt]': filter.updatedAt.toISOString(),
     };
 
-    expect(mock).toBeCalledWith(`v1/bots/`, { params });
+    expect(mock).toBeCalledWith(`bots/`, { params });
   });
 
   it('should be called with correct pagination and filters', async () => {
@@ -74,7 +74,7 @@ describe('test bot list api method', () => {
       createdAt: now,
       updatedAt: then,
     };
-    client.get(`v1/bots/`, { paging, filter });
+    client.get(`bots/`, { paging, filter });
 
     const filterParams = {
       'filter[createdAt]': filter.createdAt.toISOString(),
@@ -88,6 +88,6 @@ describe('test bot list api method', () => {
 
     const params = { ...pagingParams, ...filterParams };
 
-    expect(mock).toBeCalledWith(`v1/bots/`, { params });
+    expect(mock).toBeCalledWith(`bots/`, { params });
   });
 });
