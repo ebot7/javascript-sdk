@@ -1,11 +1,8 @@
 name: E-bot7 SDK publish
-on:
-  release: 
-    types: [created]
+on: push
 #  push:
 #    branches:
 #      - master
-
 jobs:
   publish:
     runs-on: ubuntu-latest
