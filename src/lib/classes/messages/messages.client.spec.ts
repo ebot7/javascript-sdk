@@ -21,14 +21,14 @@ describe('Ebot7MessageClient', () => {
   });
 
   describe('findMany()', () => {
-    it('should send a request to "v1/bots/:botId/messages', async () => {
+    it('should send a request to "bots/:botId/messages', async () => {
       const mockGet = jest.fn();
       mockGet.mockResolvedValue({ items: [] });
       client.get = mockGet;
       await messageClient.findMany({ botId: MOCK_BOT_ID });
       const calledUrl = mockGet.mock.calls[0][0];
 
-      expect(calledUrl).toBe(`v1/bots/${MOCK_BOT_ID}/messages`);
+      expect(calledUrl).toBe(`bots/${MOCK_BOT_ID}/messages`);
     });
 
     it('should send paging with "limit"', async () => {
@@ -101,7 +101,7 @@ describe('Ebot7MessageClient', () => {
   });
 
   describe('findOne()', () => {
-    it('should send a request to "v1/bots/:botId/messages/:messageId"', async () => {
+    it('should send a request to "bots/:botId/messages/:messageId"', async () => {
       const mockGet = jest.fn();
       const mockBotId = 'meaningless_value';
       const mockMessageId = 'meaningless_message_value';
@@ -114,14 +114,14 @@ describe('Ebot7MessageClient', () => {
       });
       const calledUrl = mockGet.mock.calls[0][0];
 
-      expect(calledUrl).toBe(`v1/bots/${mockBotId}/messages/${mockMessageId}`);
+      expect(calledUrl).toBe(`bots/${mockBotId}/messages/${mockMessageId}`);
     });
   });
 
   describe('findManyByConversation()', () => {
     const mockConvId = 'meaningless_conv_value';
 
-    it('should send a request to "v1/bots/:botId/convs/:convId/messages', async () => {
+    it('should send a request to "bots/:botId/convs/:convId/messages', async () => {
       const mockGet = jest.fn();
       mockGet.mockResolvedValue({ items: [] });
       client.get = mockGet;
@@ -132,13 +132,13 @@ describe('Ebot7MessageClient', () => {
       const calledUrl = mockGet.mock.calls[0][0];
 
       expect(calledUrl).toBe(
-        `v1/bots/${MOCK_BOT_ID}/convs/${mockConvId}/messages`
+        `bots/${MOCK_BOT_ID}/convs/${mockConvId}/messages`
       );
     });
   });
 
   describe('findOneByConversation()', () => {
-    it('should send a request to "v1/bots/:botId/convs/:convId/messages/:messageId"', async () => {
+    it('should send a request to "bots/:botId/convs/:convId/messages/:messageId"', async () => {
       const mockGet = jest.fn();
       const mockBotId = 'meaningless_value';
       const mockMessageId = 'meaningless_message_value';
@@ -154,13 +154,13 @@ describe('Ebot7MessageClient', () => {
       const calledUrl = mockGet.mock.calls[0][0];
 
       expect(calledUrl).toBe(
-        `v1/bots/${mockBotId}/convs/${mockConvId}/messages/${mockMessageId}`
+        `bots/${mockBotId}/convs/${mockConvId}/messages/${mockMessageId}`
       );
     });
   });
 
   describe('createMessage()', () => {
-    it('should send a request to "v1/bots/:botId/convs/:convId/messages"', async () => {
+    it('should send a request to "bots/:botId/convs/:convId/messages"', async () => {
       const mockPost = jest.fn();
       const mockBotId = 'meaningless_value';
       const mockConvId = 'meaningless_conv_value';
@@ -177,9 +177,7 @@ describe('Ebot7MessageClient', () => {
       });
       const calledUrl = mockPost.mock.calls[0][0];
 
-      expect(calledUrl).toBe(
-        `v1/bots/${mockBotId}/convs/${mockConvId}/messages`
-      );
+      expect(calledUrl).toBe(`bots/${mockBotId}/convs/${mockConvId}/messages`);
     });
   });
 });

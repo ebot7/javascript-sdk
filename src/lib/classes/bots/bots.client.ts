@@ -6,8 +6,6 @@ import {
 } from './bots.interfaces';
 
 export class Ebot7BotClient {
-  public static BASE_PATH = 'v1/bots';
-
   constructor(private readonly client: Ebot7Client) {}
 
   /**
@@ -20,7 +18,7 @@ export class Ebot7BotClient {
   public async findMany(
     paging: IEbot7ClientRequestPaging = {}
   ): Promise<IEbot7BotListOutput> {
-    const url = Ebot7BotClient.BASE_PATH;
+    const url = 'bots';
     const result = await this.client.get(url, { paging });
 
     return result.data;
@@ -34,7 +32,7 @@ export class Ebot7BotClient {
    * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
    */
   async findOne(options: IEbot7GetBotOptions): Promise<IEbot7BotOutput> {
-    const url = `${Ebot7BotClient.BASE_PATH}/${options.botId}`;
+    const url = `bots/${options.botId}`;
     const result = await this.client.get(url);
 
     return result.data;

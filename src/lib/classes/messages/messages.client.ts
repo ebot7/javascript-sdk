@@ -11,8 +11,6 @@ import {
 } from './messages.interfaces';
 
 export class Ebot7MessageClient {
-  public static BASE_PATH = 'v1/bots';
-
   constructor(private readonly client: Ebot7Client) {}
 
   /**
@@ -25,7 +23,7 @@ export class Ebot7MessageClient {
   public async findMany(
     options: IEbot7GetMessagesOptions
   ): Promise<IEbot7MessageListOutput> {
-    const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/messages`;
+    const url = `bots/${options.botId}/messages`;
 
     const result = await this.client.get(url, {
       paging: options.paging,
@@ -45,7 +43,7 @@ export class Ebot7MessageClient {
   async findOne(
     options: IEbot7GetMessagesByBotIdAndMessageId
   ): Promise<IEbot7MessageOutput> {
-    const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/messages/${options.messageId}`;
+    const url = `bots/${options.botId}/messages/${options.messageId}`;
     const result = await this.client.get(url);
 
     return result.data;
@@ -61,7 +59,7 @@ export class Ebot7MessageClient {
   async findManyByConversation(
     options: IEbot7ListMessageByConversationOptions
   ): Promise<IEbot7MessageListOutput> {
-    const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/convs/${options.convId}/messages`;
+    const url = `bots/${options.botId}/convs/${options.convId}/messages`;
     const result = await this.client.get(url, {
       paging: options.paging,
       filter: this.parseFilter(options?.filter),
@@ -80,7 +78,7 @@ export class Ebot7MessageClient {
   async findOneByConversation(
     options: IEbot7GetMessageByConversationOptions
   ): Promise<IEbot7MessageOutput> {
-    const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
+    const url = `bots/${options.botId}/convs/${options.convId}/messages/${options.messageId}`;
     const result = await this.client.get(url);
 
     return result.data;
@@ -96,7 +94,7 @@ export class Ebot7MessageClient {
   async create(
     options: IEbot7CreateMessageOptions
   ): Promise<IEbot7MessageOutput> {
-    const url = `${Ebot7MessageClient.BASE_PATH}/${options.botId}/convs/${options.convId}/messages`;
+    const url = `bots/${options.botId}/convs/${options.convId}/messages`;
     const result = await this.client.post(url, options.payload);
 
     return result.data;
