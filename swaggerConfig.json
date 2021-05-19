@@ -1,0 +1,23 @@
+{
+  "swagger": {
+      "outputDirectory": "./build/swagger",
+      "entryFile": "src/*",
+      "outputFormat": "openapi_3",
+      "host": "localhost:3000",
+      "version": "1.0",
+      "name": "Ebot7 Typescript Rest API",
+      "description": "Configuration for ebot7 Typescript Rest API Swagger Dcc.",
+      "license": "MIT",
+      "basePath": "/v1",
+      "securityDefinitions": {
+          "api_key": {
+              "type": "apiKey",
+              "name": "access_token",
+              "in": "query"
+          }
+      },
+      "ignore": [
+        "**/node_modules/**"
+      ]
+  }
+}
