@@ -30,7 +30,7 @@ jobs:
   # Publish to NPM
   npm:
     needs: [build]
-    permissions: 
+    permissions:
       contents: read
       packages: write
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@ebot7'
       - run: yarn
+      - run: yarn build
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_SECRET }}
-
