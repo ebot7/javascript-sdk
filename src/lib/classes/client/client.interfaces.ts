@@ -11,7 +11,15 @@ export type IEbot7ClientRequestFilter = Record<
 >;
 
 export interface IEbot7ClientRequestPaging {
+  /**
+   * The offset
+   * @IsInt
+   */
   offset?: number;
+  /**
+   * The limit
+   * @IsInt
+   */
   limit?: number;
 }
 export interface IEbot7ClientRequestConfig extends AxiosRequestConfig {
