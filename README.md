@@ -1,3 +1,72 @@
-# @bot7/sdk
+# ebot7 SDK
 
-ebot7 Javascript SDK. A thin client for developing and testing aspects of the ebot7 Application.
+ebot7 Software Development Kit(SDK) is a typescript/nodejs thin client for the ebot7 application platform public endpoints.
+
+The SDK provides clients for consuming endpoints for:
+
+- Bots,
+- Messages,
+- Conversations and
+- External-Conversations
+
+exposed by the application platform interfaces.
+
+## Installation
+
+Add this package to your project by running:
+
+`npm install @ebot7/sdk --save`
+
+or
+
+`yarn add @ebot7/sdk`
+
+## Usage Examples
+
+Using this package involve two steps
+
+first instantiate a `Client` class and then;
+instantiate a corresponding `Api Client`.
+
+The following example illustrate how to get the list of bots from the application platform using the `@ebot7/sdk`
+
+Initialize an ebot7 client
+
+```
+const MOCK_TOKEN = 'xapp-607952a149247f795d7304f9-48863fb0b20dec2b9a8a585fc63a6b8017cbab48';
+const TEST_BASE_URL = 'http://example-application-platform-url.com';
+
+const client = new Ebot7Client({
+  bearerToken: MOCK_TOKEN || '',
+  baseURL: TEST_BASE_URL,
+});
+
+```
+
+Initialize an ebot7 Bot client
+
+```
+const botClient = new Ebot7BotClient(client);
+
+```
+
+Use the Bot client to get the list of bots
+
+```
+const data = await botClient.findMany();
+
+```
+
+For more examples see the unit test files or consult the swagger documentation which is accessible by issuing:
+
+```
+npm run swaggerGen -c ./swaggerConfig.json
+```
+
+or
+
+```
+yarn swaggerGen -c ./swaggerConfig.json
+```
+
+And then navigate to ` http://localhost:4222`
