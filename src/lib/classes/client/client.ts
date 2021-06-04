@@ -17,6 +17,10 @@ export class Ebot7Client {
 
   protected config: AxiosRequestConfig;
 
+  /**
+   * Axios configuration including the bearToken.
+   * @param {string} bearerToken which can be an application or an application instance access token.
+   */
   constructor({ bearerToken, ...config }: IEbot7ClientConfig) {
     this.config = {
       ...Ebot7Client.DEFAULT_CONFIG,
