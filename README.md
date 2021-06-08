@@ -1,19 +1,19 @@
-# ebot7 SDK
+# e-bot7 SDK
 
-ebot7 Software Development Kit(SDK) is a typescript/nodejs thin client for the ebot7 application platform public endpoints.
+The e-bot7 Software Development Kit (SDK) is a typescript/nodejs thin client for the e-bot7 application platform public endpoints.
 
-The SDK provides clients for consuming endpoints for:
+The SDK provides clients for consuming endpoints for the following:
 
-- Bots,
-- Messages,
-- Conversations and
-- External-Conversations
+- Bots
+- Messages
+- Conversations
+- External conversations
 
-exposed by the application platform interfaces.
+These endpoints are exposed by the application platform interfaces.
 
 ## Installation
 
-Add this package to your project by running:
+Add this package to your project by running command:
 
 `npm install @ebot7/sdk --save`
 
@@ -23,14 +23,14 @@ or
 
 ## Usage Examples
 
-Using this package involve two steps
+Using this package involves two steps:
 
-first instantiate a `Client` class and then;
+First, instantiate a `Client` class and then
 instantiate a corresponding `Api Client`.
 
-The following example illustrate how to get the list of bots from the application platform using the `@ebot7/sdk`
+The following example illustrates how to get the list of bots from the application platform using the `@ebot7/sdk`
 
-Initialize an ebot7 client
+Initialize an e-bot7 client:
 
 ```
 const MOCK_TOKEN = 'xapp-607952a149247f795d7304f9-48863fb0b20dec2b9a8a585fc63a6b8017cbab48';
@@ -43,21 +43,21 @@ const client = new Ebot7Client({
 
 ```
 
-Initialize an ebot7 Bot client
+Initialize an e-bot7 Bot client:
 
 ```
 const botClient = new Ebot7BotClient(client);
 
 ```
 
-Use the Bot client to get the list of bots
+Use the Bot client to get the list of bots:
 
 ```
 const data = await botClient.findMany();
 
 ```
 
-For more examples see the unit test files or consult the swagger documentation which is accessible by issuing:
+For more examples see the unit test files or consult the swagger documentation which is accessible by issuing command:
 
 ```
 npm run swaggerGen -c ./swaggerConfig.json
@@ -69,4 +69,4 @@ or
 yarn swaggerGen -c ./swaggerConfig.json
 ```
 
-And then navigate to ` http://localhost:4222`
+Then navigate to ` http://localhost:4222`
