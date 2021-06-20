@@ -18,7 +18,11 @@ export class Ebot7AppClient {
     options: IEbot7InstallApplicationInstanceOptions
   ): Promise<IEbot7InstallApplicationInstanceOutput> {
     const url = 'application/install';
-    const result = await this.client.post(url, options);
+    const result = await this.client.post(url, options, {
+      headers: {
+        'x-Delegated-Authorization': `Bearer ${options.delegatedAuthToken}`
+      }
+    });
     return result.data;
   }
 }
