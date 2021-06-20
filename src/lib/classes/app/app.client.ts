@@ -20,8 +20,8 @@ export class Ebot7AppClient {
     const url = 'application/install';
     const result = await this.client.post(url, options, {
       headers: {
-        'x-Delegated-Authorization': `Bearer ${options.delegatedAuthToken}`
-      }
+        'x-Delegated-Authorization': `Bearer ${options.delegatedAuthToken}`,
+      },
     });
     return result.data;
   }

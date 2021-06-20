@@ -33,9 +33,9 @@ describe('Ebot7BotClient', () => {
 
       const headerConfig = {
         headers: {
-        'x-Delegated-Authorization': `Bearer ${opts.delegatedAuthToken}`
-      }
-    };
+          'x-Delegated-Authorization': `Bearer ${opts.delegatedAuthToken}`,
+        },
+      };
 
       await appClient.install(opts);
 
