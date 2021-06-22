@@ -45,7 +45,7 @@ describe('Ebot7ExternalConversationClient', () => {
 
       mockPost.mockResolvedValue({ items: [] });
       client.post = mockPost;
-      await conversationClient.create({
+      await externalConversationClient.create({
         botId: mockBotId,
         payload: {},
       });
