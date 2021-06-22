@@ -3,7 +3,10 @@ import {
   IUpdateExternalConversationOptions,
 } from '.';
 import { Ebot7Client } from '../client';
-import { IEbot7ConversationOutput, IEbot7CreateConversationOptions } from '../conversations';
+import {
+  IEbot7ConversationOutput,
+  IEbot7CreateConversationOptions,
+} from '../conversations';
 
 export class Ebot7ExternalConversationClient {
   constructor(private readonly client: Ebot7Client) {}
