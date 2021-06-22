@@ -56,7 +56,7 @@ describe('Ebot7ExternalConversationClient', () => {
   });
 
   describe('patchConversation()', () => {
-    it('should send a request to "bots/:botId/convs/:convId"', async () => {
+    it('should send a request to "bots/:botId/external-convs/:convId"', async () => {
       const mockPatch = jest.fn();
       const mockBotId = 'meaningless_value';
       const mockConvId = 'meaningless_conv_value';
