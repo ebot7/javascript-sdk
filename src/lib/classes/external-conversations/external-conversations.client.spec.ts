@@ -51,7 +51,7 @@ describe('Ebot7ExternalConversationClient', () => {
       });
       const calledUrl = mockPost.mock.calls[0][0];
 
-      expect(calledUrl).toBe(`bots/${mockBotId}/exernal-convs`);
+      expect(calledUrl).toBe(`bots/${mockBotId}/external-convs`);
     });
   });
 
