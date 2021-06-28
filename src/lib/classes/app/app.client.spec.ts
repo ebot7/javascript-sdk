@@ -26,18 +26,26 @@ describe('Ebot7BotClient', () => {
       mockPost.mockResolvedValue({});
 
       const opts: IEbot7InstallApplicationInstanceOptions = {
+        delegatedAuthToken: 'x-delegated-authorization-token',
         applicationId: 'meaningless-application-id',
         botId: 'meaningless-bot-id',
+      };
+
+      const headerConfig = {
+        headers: {
+          'x-Delegated-Authorization': `Bearer ${opts.delegatedAuthToken}`,
+        },
       };
 
       await appClient.install(opts);
 
       const calledUrl = mockPost.mock.calls[0][0];
       const calledParams = mockPost.mock.calls[0][1];
+      const calledHeaders = mockPost.mock.calls[0][2];
 
       expect(calledUrl).toBe(`application/install`);
-
       expect(calledParams).toEqual(opts);
+      expect(calledHeaders).toEqual(headerConfig);
     });
   });
 });

@@ -8,7 +8,8 @@ import {
 
 export class Ebot7Client {
   public static DEFAULT_CONFIG: Partial<IEbot7ClientConfig> = {
-    baseURL: `https://public-api.e-bot7.de/`,
+    baseURL: `https://api.production.e-bot7.de/`,
+    //baseURL: `https://api.e-bot7.de/`, // TODO: use the new API endpoint when it becomes available.
   };
 
   private static API_VERSION = 'v1';

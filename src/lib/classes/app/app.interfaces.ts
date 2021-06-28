@@ -43,10 +43,10 @@ interface IEbot7ApplicationInstanceObject {
 }
 
 export interface IEbot7InstallApplicationInstanceOptions {
+  delegatedAuthToken: string;
   applicationId: string;
   botId?: string;
 }
-
 export interface IEbot7InstallApplicationInstanceOutput {
   applicationInstanceKey: string;
   applicationInstance: IEbot7ApplicationInstanceObject;
