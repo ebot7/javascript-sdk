@@ -1003,10 +1003,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.1.tgz#283f669ff76d7b8260df8ab7a4262cc83d988256"
   integrity sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
 
-"@types/node@*", "@types/node@^15.12.1":
-  version "15.12.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.4.tgz#e1cf817d70a1e118e81922c4ff6683ce9d422e26"
-  integrity sha512-zrNj1+yqYF4WskCMOHwN+w9iuD12+dGm0rQ35HLl9/Ouuq52cEtd0CH9qMgrdNmi5ejC1/V7vKEXYubB+65DkA==
+"@types/node@*", "@types/node@^15.12.5":
+  version "15.12.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.5.tgz#9a78318a45d75c9523d2396131bd3cca54b2d185"
+  integrity sha512-se3yX7UHv5Bscf8f1ERKvQOD6sTyycH3hdaoozvaLxgUiY5lIGEeH37AD0G0Qi9kPqihPn0HOfd2yaIEN9VwEg==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -5636,10 +5636,10 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
-prettier-plugin-organize-imports@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-organize-imports/-/prettier-plugin-organize-imports-2.1.0.tgz#5b2e762365b9bd2b25b4460c1f2cb2703b8b78db"
-  integrity sha512-P6TzXkuZRV4g9Fl363tN+r6/ecynu0fwmItKCb/04iksrUtwl/6Jf4DxBPuW8UbcgFRadltxB0VlV5Yh1Ec0Ow==
+prettier-plugin-organize-imports@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-organize-imports/-/prettier-plugin-organize-imports-2.2.0.tgz#dcdd5222416a90bd819734f131fea4a22b1c613a"
+  integrity sha512-2WM3moc/cAPCCsSneYhaL4+mMws0Bypbxz+98wuRyaA7GMokhOECVkQCG7l2hcH+9/4d5NsgZs9yktfwDy4r7A==
 
 prettier@^2.1.1:
   version "2.3.1"
