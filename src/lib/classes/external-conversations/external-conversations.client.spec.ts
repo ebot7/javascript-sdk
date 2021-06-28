@@ -38,8 +38,25 @@ describe('Ebot7ExternalConversationClient', () => {
     });
   });
 
+  describe('createConversation()', () => {
+    it('should send a request to "bots/:botId/external-convs"', async () => {
+      const mockPost = jest.fn();
+      const mockBotId = 'meaningless_value';
+
+      mockPost.mockResolvedValue({ items: [] });
+      client.post = mockPost;
+      await externalConversationClient.create({
+        botId: mockBotId,
+        payload: {},
+      });
+      const calledUrl = mockPost.mock.calls[0][0];
+
+      expect(calledUrl).toBe(`bots/${mockBotId}/external-convs`);
+    });
+  });
+
   describe('patchConversation()', () => {
-    it('should send a request to "bots/:botId/convs/:convId"', async () => {
+    it('should send a request to "bots/:botId/external-convs/:convId"', async () => {
       const mockPatch = jest.fn();
       const mockBotId = 'meaningless_value';
       const mockConvId = 'meaningless_conv_value';

@@ -3,7 +3,10 @@ import {
   IUpdateExternalConversationOptions,
 } from '.';
 import { Ebot7Client } from '../client';
-import { IEbot7ConversationOutput } from '../conversations';
+import {
+  IEbot7ConversationOutput,
+  IEbot7CreateConversationOptions,
+} from '../conversations';
 
 export class Ebot7ExternalConversationClient {
   constructor(private readonly client: Ebot7Client) {}
@@ -20,6 +23,22 @@ export class Ebot7ExternalConversationClient {
   ): Promise<IEbot7ConversationOutput> {
     const url = `bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.get(url);
+
+    return result.data;
+  }
+
+  /**
+   * Creates a new conversation for bot with botId
+   *
+   * @param  options - Instance of ICreateConversationOptions
+   * @returns Single conversation object
+   * @throws  {Not Found | Unauthorized | Forbidden | Request Timeout | Internal Server Error | EAI_AGAIN} HTTP Error
+   */
+  public async create(
+    options: IEbot7CreateConversationOptions
+  ): Promise<IEbot7ConversationOutput> {
+    const url = `bots/${options.botId}/external-convs`;
+    const result = await this.client.post(url, options.payload);
 
     return result.data;
   }
