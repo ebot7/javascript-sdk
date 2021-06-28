@@ -3,12 +3,13 @@ import {
   IEbot7ClientConfig,
   IEbot7ClientRequestConfig,
   IEbot7ClientRequestFilter,
-  IEbot7ClientRequestPaging,
+  IEbot7ClientRequestPaging
 } from './client.interfaces';
 
 export class Ebot7Client {
   public static DEFAULT_CONFIG: Partial<IEbot7ClientConfig> = {
-    baseURL: `https://api.e-bot7.de/`,
+    baseURL: `https://api.production.e-bot7.de/`
+    //baseURL: `https://api.e-bot7.de/`,
   };
 
   private static API_VERSION = 'v1';
@@ -24,7 +25,7 @@ export class Ebot7Client {
   constructor({ bearerToken, ...config }: IEbot7ClientConfig) {
     this.config = {
       ...Ebot7Client.DEFAULT_CONFIG,
-      ...config,
+      ...config
     };
 
     if (this.config.baseURL?.endsWith('/')) {
@@ -39,9 +40,9 @@ export class Ebot7Client {
         Authorization: `Bearer ${bearerToken}`,
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        ...(this.config?.headers || {}),
+        ...(this.config?.headers || {})
       },
-      baseURL: `${this.config.baseURL}`,
+      baseURL: `${this.config.baseURL}`
     });
   }
 
@@ -89,20 +90,20 @@ export class Ebot7Client {
     if (parsedFilter) {
       params = {
         ...(params || {}),
-        ...parsedFilter,
+        ...parsedFilter
       };
     }
 
     if (parsedPaging) {
       params = {
         ...(params || {}),
-        ...parsedPaging,
+        ...parsedPaging
       };
     }
 
     return {
       ...config,
-      params,
+      params
     };
   }
 
