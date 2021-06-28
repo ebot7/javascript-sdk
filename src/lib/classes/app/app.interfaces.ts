@@ -8,14 +8,14 @@ export enum IEbot7EApplicationPermission {
   MESSAGES_CREATE_AS_VISITOR = 'messages:CreateAs:Visitor',
   MESSAGES_CREATE_AS_AGENT = 'messages:CreateAs:Agent',
   MESSAGES_CREATE_AS_BOT = 'messages:CreateAs:Bot',
-  MESSAGES_READ = 'messages:Read'
+  MESSAGES_READ = 'messages:Read',
 }
 
 export enum IEbot7EApplicationEvents {
   MESSAGES_CREATED = 'message:created',
   CONVERSATION_CREATED = 'conversation:created',
   CONVERSATION_ASSIGNED = 'conversation:assigned',
-  CONVERSATION_ARCHIVED = 'conversation:archived'
+  CONVERSATION_ARCHIVED = 'conversation:archived',
 }
 
 interface IEbot7ApplicationVersionObject {
