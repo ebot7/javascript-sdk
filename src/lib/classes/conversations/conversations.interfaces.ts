@@ -48,7 +48,6 @@ export interface IEbot7ConversationPayload {
   needsInteraction?: boolean;
   isArchived?: boolean;
   isVisitorBanned?: boolean;
-  genesysInteractionUUID?: string;
   integrations?: IEbot7ConversationExternalData[];
 }
 
