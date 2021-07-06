@@ -1,11 +1,11 @@
 import {
   IEbot7GetExternalConversationOptions,
-  IUpdateExternalConversationOptions,
+  IUpdateExternalConversationOptions
 } from '.';
 import { Ebot7Client } from '../client';
 import {
   IEbot7ConversationOutput,
-  IEbot7CreateConversationOptions,
+  IEbot7CreateConversationOptions
 } from '../conversations';
 
 export class Ebot7ExternalConversationClient {
@@ -23,9 +23,11 @@ export class Ebot7ExternalConversationClient {
   ): Promise<IEbot7ConversationOutput> {
     const url = `bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.get(url);
-    // Return first item in list of return conversations. 
+    // Return first item in list of return conversations.
     // Adapt output to expected return type.
-    return {item: result.data?.items?.[0]};
+    if (result.data?.items && result.data?.items.length) {
+      return { item: result.data.items[0] };
+    } else return { item: null };
   }
 
   /**
