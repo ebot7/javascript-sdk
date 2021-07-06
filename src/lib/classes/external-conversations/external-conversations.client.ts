@@ -23,8 +23,9 @@ export class Ebot7ExternalConversationClient {
   ): Promise<IEbot7ConversationOutput> {
     const url = `bots/${options.botId}/external-convs/${options.externalId}`;
     const result = await this.client.get(url);
-
-    return result.data;
+    // Return first item in list of return conversations. 
+    // Adapt output to expected return type.
+    return {item: result.data?.items?.[0]};
   }
 
   /**
