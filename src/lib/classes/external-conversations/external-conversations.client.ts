@@ -1,11 +1,11 @@
 import {
   IEbot7GetExternalConversationOptions,
-  IUpdateExternalConversationOptions
+  IUpdateExternalConversationOptions,
 } from '.';
 import { Ebot7Client } from '../client';
 import {
   IEbot7ConversationOutput,
-  IEbot7CreateConversationOptions
+  IEbot7CreateConversationOptions,
 } from '../conversations';
 
 export class Ebot7ExternalConversationClient {
